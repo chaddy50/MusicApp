@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import { songAction } from '../actions';
-import { DIVIDER, SECONDARY_DARK } from '../themes/PurpleTeal/PurpleTeal';
+import { songAction } from '../../actions';
+import { DIVIDER, SECONDARY_DARK } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region Song

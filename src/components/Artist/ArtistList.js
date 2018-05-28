@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { ListView, View } from 'react-native';
 import _ from 'lodash';
 import Artist from './Artist';
-import { BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
+import { BACKGROUND } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region ArtistList

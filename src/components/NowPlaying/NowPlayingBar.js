@@ -11,12 +11,13 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import GestureRecognizer from 'react-native-swipe-gestures';
-import { playPauseAction } from '../actions/NowPlayingActions';
-import defaultAlbumCover from '../images/defaultAlbum.png';
-import playIcon from '../images/play.png';
-import pauseIcon from '../images/pause.png';
-import { skipTrack } from '../actions';
-import { PRIMARY, ON_PRIMARY } from '../themes/PurpleTeal/PurpleTeal';
+import { playPauseAction } from '../../actions/NowPlayingActions';
+import defaultAlbumCover from '../../images/defaultAlbum.png';
+import playIcon from '../../images/play_white.png';
+import pauseIcon from '../../images/pause_white.png';
+import { skipTrack } from '../../actions';
+import { PRIMARY, ON_PRIMARY } from '../../themes/PurpleTeal/PurpleTeal';
+import ProgressBar from './ProgressBar';
 //#endregion
 
 //#region NowPlayingBar
@@ -28,18 +29,23 @@ class NowPlayingBar extends Component {
 			return (
 				<GestureRecognizer onSwipeLeft={this.props.skipTrack}>
 					<View style={styles.barContainerStyle}>
-						<View>
-							<Image source={coverPath} style={styles.albumCoverStyle} />
+						<View style={{ flex: 1, height: 5, marginBottom: 5 }}>
+							<ProgressBar />
 						</View>
-						<View style={styles.nowPlayingInfoStyle}>
-							<Text numberOfLines={1} style={styles.trackTitleStyle}>{song.title}</Text>
-							<Text numberOfLines={1} style={styles.trackArtistStyle}>{song.artist}</Text>
-							<Text numberOfLines={1} style={styles.trackAlbumStyle}>{song.album}</Text>
-						</View>
-						<View style={styles.playPauseContainerStyle}>
-							<TouchableWithoutFeedback onPress={this.props.playPauseAction}>
-								<Image source={playPauseIcon} style={styles.playPauseIconStyle} />
-							</TouchableWithoutFeedback>
+						<View style={{ flexDirection: 'row' }}>
+							<View>
+								<Image source={coverPath} style={styles.albumCoverStyle} />
+							</View>
+							<View style={styles.nowPlayingInfoStyle}>
+								<Text numberOfLines={1} style={styles.trackTitleStyle}>{song.title}</Text>
+								<Text numberOfLines={1} style={styles.trackArtistStyle}>{song.artist}</Text>
+								<Text numberOfLines={1} style={styles.trackAlbumStyle}>{song.album}</Text>
+							</View>
+							<View style={styles.playPauseContainerStyle}>
+								<TouchableWithoutFeedback onPress={this.props.playPauseAction}>
+									<Image source={playPauseIcon} style={styles.playPauseIconStyle} />
+								</TouchableWithoutFeedback>
+							</View>
 						</View>
 					</View>
 				</GestureRecognizer>
@@ -63,11 +69,10 @@ const styles = {
 	barContainerStyle: {
 		width: '100%', 
 		backgroundColor: PRIMARY, 
-		height: 75, 
+		height: 80, 
 		position: 'absolute', 
 		bottom: 0,
 		flex: 1,
-		flexDirection: 'row',
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 1,
@@ -75,7 +80,7 @@ const styles = {
 	},
 	albumCoverStyle: {
 		width: 75,
-		height: 75
+		height: 75,
 	},
 	nowPlayingInfoStyle: {
 		flex: 1, 

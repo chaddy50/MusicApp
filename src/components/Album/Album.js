@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { ScrollView, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import Song from './Song';
-import { DIVIDER } from '../themes/PurpleTeal/PurpleTeal';
+import Song from '../Song/Song';
+import { DIVIDER } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region Album

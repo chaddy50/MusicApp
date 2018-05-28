@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation	} from 'react-navigation';
-import { BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
+import { BACKGROUND } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region AlbumCard

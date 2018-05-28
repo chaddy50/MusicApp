@@ -6,12 +6,13 @@ import ArtistCard from './ArtistCard';
 //#region Artist
 class Artist extends Component {
 	render() {
-		const { artist } = this.props;
+		const { artist, albumList } = this.props;
 
 		return (
 			<ArtistCard 
 				label={artist.name} 
 				onPress={this.onPress.bind(this)} 
+				albumList={albumList}
 			/>
 		);
 	}

@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import _ from 'lodash';
 import AlbumCard from './AlbumCard';
-import defaultAlbumCover from '../images/defaultAlbum.png';
-import { PRIMARY, BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
+import defaultAlbumCover from '../../images/defaultAlbum.png';
+import { PRIMARY, BACKGROUND } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region AlbumList

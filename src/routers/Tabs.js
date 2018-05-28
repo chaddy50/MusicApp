@@ -3,7 +3,7 @@ import { View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { TabNavigator } from 'react-navigation';
 import _ from 'lodash';
-import ArtistList from '../components/ArtistList';
+import ArtistList from '../components/Artist/ArtistList';
 import { buildLibrary } from '../actions';
 import { PRIMARY, PRIMARY_DARK, SECONDARY, ON_PRIMARY, ON_PRIMARY_NO_FOCUS } from '../themes/PurpleTeal/PurpleTeal';
 

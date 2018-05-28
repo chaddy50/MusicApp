@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
-import AlbumList from '../components/AlbumList';
-import Album from '../components/Album';
+import AlbumList from '../components/Album/AlbumList';
+import Album from '../components/Album/Album';
 import Tabs from './Tabs';
-import NowPlayingBar from '../components/NowPlayingBar';
+import NowPlayingBar from '../components/NowPlaying/NowPlayingBar';
 import { ON_PRIMARY, SECONDARY, PRIMARY, BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
 
 const styles = {
