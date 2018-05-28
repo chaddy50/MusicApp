@@ -87,7 +87,7 @@ class AlbumList extends Component {
 
 const styles = {
 	containerStyle: {
-		backgroundColor: '#404040',
+		backgroundColor: '#404041',
 		flex: 1
 	}
 };
