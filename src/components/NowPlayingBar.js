@@ -29,10 +29,7 @@ class NowPlayingBar extends Component {
 				<GestureRecognizer onSwipeLeft={this.props.skipTrack}>
 					<View style={styles.barContainerStyle}>
 						<View>
-							<Image 
-								source={coverPath} 
-								style={styles.albumCoverStyle} 
-							/>
+							<Image source={coverPath} style={styles.albumCoverStyle} />
 						</View>
 						<View style={styles.nowPlayingInfoStyle}>
 							<Text numberOfLines={1} style={styles.trackTitleStyle}>{song.title}</Text>
@@ -40,11 +37,8 @@ class NowPlayingBar extends Component {
 							<Text numberOfLines={1} style={styles.trackAlbumStyle}>{song.album}</Text>
 						</View>
 						<View style={styles.playPauseContainerStyle}>
-							<TouchableWithoutFeedback onPress={() => this.props.playPauseAction(song)}>
-								<Image
-									source={playPauseIcon}
-									style={styles.playPauseIconStyle}
-								/>
+							<TouchableWithoutFeedback onPress={this.props.playPauseAction}>
+								<Image source={playPauseIcon} style={styles.playPauseIconStyle} />
 							</TouchableWithoutFeedback>
 						</View>
 					</View>

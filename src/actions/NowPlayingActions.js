@@ -1,6 +1,10 @@
-	import TrackPlayer from 'react-native-track-player';
+//#region Imports
+import TrackPlayer from 'react-native-track-player';
 import { PLAY, PAUSE, STOP, RESET } from './types';
+//#endregion
 
+//#region Exported functions
+// Logic to run when a song is tapped
 export const songAction = (songList, songIndex) => {
 	return (dispatch) => {
 		const song = songList[songIndex].value;
@@ -44,34 +48,41 @@ export const songAction = (songList, songIndex) => {
 	};
 };
 
-const buildTrack = (song) => {
-	const track = {
-		id: song.uri,
-		url: song.uri,
-		title: song.title,
-		artist: song.artist,
-		album: song.album,
-		genre: song.genre,
-		cover: song.cover,
-		year: song.year
-	};
-
-	return track;
-};
-
-export const playPauseAction = (song) => {
+// Logic to run when Play/Pause button is tapped
+export const playPauseAction = () => {
 	return (dispatch) => {
 		TrackPlayer.getState()
 			.then((state) => {
 				if (state === TrackPlayer.STATE_PLAYING) {
 					pause(dispatch);
 				} else {
-					play(dispatch, song);
+					play(dispatch);
 				}
 			});
 	};
 };
 
+// Logic to run when swiping left on NowPlayingBar
+export const skipTrack = () => {
+	return (dispatch) => {
+		TrackPlayer.skipToNext()
+			.catch(() => {}); // Catch case where there is no track to skip to
+
+		TrackPlayer.getCurrentTrack()
+			.then((trackID) => {
+				TrackPlayer.getTrack(trackID)
+					.then((track) => {
+						dispatch({
+							type: PLAY,
+							payload: track
+						});
+					});
+			});
+	};
+};
+//#endregion
+
+//#region Helper functions
 const play = (dispatch) => {
 	TrackPlayer.play();
 
@@ -105,27 +116,25 @@ const reset = (dispatch) => {
 	});
 };
 
-export const skipTrack = () => {
-	return (dispatch) => {
-		TrackPlayer.skipToNext()
-			.catch(() => {}); // Catch case where there is no track to skip to
-
-		TrackPlayer.getCurrentTrack()
-			.then((trackID) => {
-				TrackPlayer.getTrack(trackID)
-					.then((track) => {
-						dispatch({
-							type: PLAY,
-							payload: track
-						});
-					});
-			});
-	};
-};
-
 const addTrackToList = (songList, songIndex) => {
 	for (let i = songIndex; i < songList.length; i++) {
 		const track = buildTrack(songList[i].value);
 		TrackPlayer.add(track);
 	}
 };
+
+const buildTrack = (song) => {
+	const track = {
+		id: song.uri,
+		url: song.uri,
+		title: song.title,
+		artist: song.artist,
+		album: song.album,
+		genre: song.genre,
+		cover: song.cover,
+		year: song.year
+	};
+
+	return track;
+};
+//#endregion

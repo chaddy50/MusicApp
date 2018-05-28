@@ -7,7 +7,6 @@ import ReduxThunk from 'redux-thunk';
 import TrackPlayer from 'react-native-track-player';
 import reducers from './reducers';
 import Drawer from './routers/Drawer';
-import NowPlayingBar from './components/NowPlayingBar';
 
 class App extends Component {
 	componentWillMount() {
