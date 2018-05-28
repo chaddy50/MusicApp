@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation';
 import _ from 'lodash';
 import AlbumCard from './AlbumCard';
 import defaultAlbumCover from '../images/defaultAlbum.png';
+import { PRIMARY, BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
 
 class AlbumList extends Component {
 
@@ -26,7 +27,7 @@ class AlbumList extends Component {
 		return (
 			<TouchableHighlight 
 				style={styles.touchableStyle}
-				underlayColor="#9900CC"
+				underlayColor={PRIMARY}
 				onPress={() => 
 					this.props.navigation.navigate(
 						'Album', 
@@ -87,7 +88,7 @@ class AlbumList extends Component {
 
 const styles = {
 	containerStyle: {
-		backgroundColor: '#404040',
+		backgroundColor: BACKGROUND,
 		flex: 1
 	}
 };

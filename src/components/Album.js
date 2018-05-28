@@ -3,6 +3,7 @@ import { ScrollView, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import Song from './Song';
+import { DIVIDER } from '../themes/PurpleTeal/PurpleTeal';
 
 class Album extends Component {
 	state = {
@@ -45,7 +46,7 @@ class Album extends Component {
 const styles = {
 	albumInfoContainerStyle: {
 		alignItems: 'center',
-		borderColor: '#333333',
+		borderColor: DIVIDER,
 		borderBottomWidth: 1,
 		padding: 10
 	},
@@ -54,11 +55,11 @@ const styles = {
 		height: 150
 	},
 	albumTitleStyle: {
-		color: 'white',
+		color: 'black',
 		fontSize: 18
 	},
 	albumYearStyle: {
-		color: 'white',
+		color: 'black',
 		fontSize: 14
 	}
 };

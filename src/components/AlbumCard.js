@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation	} from 'react-navigation';
+import { BACKGROUND, DIVIDER } from '../themes/PurpleTeal/PurpleTeal';
 
 class AlbumCard extends Component {
 	render() {
@@ -24,10 +25,10 @@ const screenWidth = Dimensions.get('window').width;
 const styles = {
 	albumContainerStyle: {
 		flex: 1,
-		backgroundColor: '#404040',
+		backgroundColor: BACKGROUND,
 		flexDirection: 'row',
 		borderBottomWidth: 1,
-		borderColor: '#333333'
+		borderColor: DIVIDER
 	},
 	albumCoverStyle: {
 		width: screenWidth,

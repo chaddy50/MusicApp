@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { TabNavigator } from 'react-navigation';
 import _ from 'lodash';
 import ArtistList from '../components/ArtistList';
 import { buildLibrary } from '../actions';
+import { PRIMARY, PRIMARY_DARK, SECONDARY, ON_PRIMARY, ON_PRIMARY_NO_FOCUS } from '../themes/PurpleTeal/PurpleTeal';
 
 class Tabs extends Component {
 	componentWillMount() {
@@ -14,13 +15,15 @@ class Tabs extends Component {
 	buildTabs() {
 		const tabConfig = {
 			tabBarOptions: {
-				pressColor: '#9900CC',
+				pressColor: SECONDARY,
 				style: {
-					backgroundColor: '#404040'
+					backgroundColor: PRIMARY
 				},
 				indicatorStyle: {
-					backgroundColor: '#9900CC'
+					backgroundColor: SECONDARY
 				},
+				activeTintColor: ON_PRIMARY,
+				inactiveTintColor: ON_PRIMARY_NO_FOCUS,
 				scrollEnabled: true,
 				tabStyle: {
 					width: 115
@@ -53,6 +56,7 @@ class Tabs extends Component {
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
+				<StatusBar backgroundColor={PRIMARY_DARK} />
 				{this.buildTabs()}
 			</View>
 		);

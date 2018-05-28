@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableHighlight, Text } from 'react-native';
+import { DIVIDER } from '../../themes/PurpleTeal/PurpleTeal';
 
 const TouchableCard = ({ onPress, label }) => {
 	return (
@@ -18,10 +19,10 @@ const styles = {
 		alignItems: 'center',
 		padding: 15,
 		borderBottomWidth: 1,
-		borderColor: '#333333'
+		borderColor: DIVIDER
 	},
 	labelStyle: {
-		color: 'white'
+		color: 'black'
 	}
 };
 

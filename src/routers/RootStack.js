@@ -6,13 +6,14 @@ import AlbumList from '../components/AlbumList';
 import Album from '../components/Album';
 import Tabs from './Tabs';
 import NowPlayingBar from '../components/NowPlayingBar';
+import { ON_PRIMARY, SECONDARY, PRIMARY, BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
 
 const styles = {
 	headerStyle: {
-		backgroundColor: '#404040'
+		backgroundColor: PRIMARY
 	},
 	headerTitleStyle: {
-		color: '#FFF'
+		color: ON_PRIMARY
 	}
 };
 
@@ -36,8 +37,8 @@ export const RootStack = StackNavigator(
 			headerStyle,
 			headerTitleStyle,
 			title: props.navigation.getParam('title'),
-			headerTintColor: '#fff',
-			headerPressColorAndroid: '#9900CC'
+			headerTintColor: ON_PRIMARY,
+			headerPressColorAndroid: SECONDARY
 		})
 	},
 	Album: {
@@ -46,15 +47,15 @@ export const RootStack = StackNavigator(
 			headerStyle,
 			headerTitleStyle,
 			title: props.navigation.getParam('title'),
-			headerTintColor: '#fff',
-			headerPressColorAndroid: '#9900CC'
+			headerTintColor: ON_PRIMARY,
+			headerPressColorAndroid: SECONDARY
 		})
 	}
 },	
 	{
 		initialRouteName: 'Home',
 		cardStyle: {
-			backgroundColor: '#404040'
+			backgroundColor: BACKGROUND
 		}
 	}
 );
@@ -64,7 +65,7 @@ class TabStack extends Component {
 		const marginBottom = this.props.marginBottom;
 		
 		return (
-			<View style={{ flex: 1, backgroundColor: '#404040' }}>
+			<View style={{ flex: 1, backgroundColor: BACKGROUND }}>
 				<View style={{ flex: 1, marginBottom }}>
 					<RootStack />
 				</View>

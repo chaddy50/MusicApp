@@ -1,0 +1,11 @@
+export const PRIMARY = '#512da8';
+export const PRIMARY_LIGHT = '#8559da';
+export const PRIMARY_DARK = '#140078';
+export const SECONDARY = '#00bcd4';
+export const SECONDARY_LIGHT = '#62efff';
+export const SECONDARY_DARK = '#008ba3';
+export const ON_PRIMARY = '#fff';
+export const ON_PRIMARY_NO_FOCUS = '#eeeeee';
+export const ON_SECONDARY = '#000';
+export const BACKGROUND = '#eeeeee';
+export const DIVIDER = '#bdbdbd';

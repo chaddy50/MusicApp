@@ -1,5 +1,6 @@
 import { DrawerNavigator } from 'react-navigation';
 import TabStack from './RootStack';
+import { PRIMARY, SECONDARY, ON_PRIMARY, BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
 
 const Drawer = DrawerNavigator(
 	{
@@ -10,15 +11,12 @@ const Drawer = DrawerNavigator(
 	{
 		initialRouteName: 'Home',
 		contentOptions: {
-			activeBackgroundColor: '#404040',
-			inactiveBackgroundColor: '#404040',
-			activeTintColor: '#FFF',
+			activeBackgroundColor: PRIMARY,
+			inactiveBackgroundColor: SECONDARY,
+			activeTintColor: ON_PRIMARY,
 			itemsContainerStyle: {
-				backgroundColor: '#FFF',
+				backgroundColor: BACKGROUND,
 				flex: 1
-			},
-			indicatorStyle: {
-				backgroundColor: '#9900CC'
 			}
 		}
 	}

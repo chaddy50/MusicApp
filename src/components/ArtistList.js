@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ListView, View } from 'react-native';
 import _ from 'lodash';
 import Artist from './Artist';
+import { BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
 
 class ArtistList extends Component {
 	render() {
@@ -52,7 +53,7 @@ class ArtistList extends Component {
 
 const styles = {
 	containerStyle: {
-		backgroundColor: '#404040',
+		backgroundColor: BACKGROUND,
 		flex: 1
 	}
 };

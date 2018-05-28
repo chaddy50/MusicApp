@@ -3,6 +3,7 @@ import { Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { songAction } from '../actions';
+import { PRIMARY, DIVIDER } from '../themes/PurpleTeal/PurpleTeal';
 
 class Song extends Component {
 	render() {
@@ -12,7 +13,7 @@ class Song extends Component {
 		return (
 			<TouchableHighlight
 				style={touchableStyle}
-				underlayColor="#9900CC"
+				underlayColor={PRIMARY}
 				onPress={() => this.props.songAction(songList, songIndex)}
 			>
 				<View style={containerStyle}>
@@ -35,7 +36,7 @@ const mapStateToProps = (state, props) => {
 const styles = {
 	touchableStyle: {
 		borderBottomWidth: 1,
-		borderColor: '#333333',
+		borderColor: DIVIDER,
 		height: 40
 	},
 	containerStyle: {
@@ -45,13 +46,13 @@ const styles = {
 		padding: 10
 	},
 	trackNumStyle: {
-		color: '#FFF',
+		color: 'black',
 		textAlign: 'right',
 		paddingRight: 10,
 		width: 30
 	},
 	titleStyle: {
-		color: '#FFF',
+		color: 'black',
 		paddingRight: 10,
 		flex: 1
 	}

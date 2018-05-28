@@ -15,6 +15,7 @@ import defaultAlbumCover from '../images/defaultAlbum.png';
 import playIcon from '../images/play.png';
 import pauseIcon from '../images/pause.png';
 import { skipTrack } from '../actions';
+import { PRIMARY, ON_PRIMARY } from '../themes/PurpleTeal/PurpleTeal';
 
 class NowPlayingBar extends Component {
 	render() {
@@ -62,14 +63,16 @@ class NowPlayingBar extends Component {
 const styles = {
 	barContainerStyle: {
 		width: '100%', 
-		backgroundColor: '#404040', 
+		backgroundColor: PRIMARY, 
 		height: 75, 
 		position: 'absolute', 
 		bottom: 0,
-		borderColor: '#333333',
-		borderTopWidth: 2,
 		flex: 1,
-		flexDirection: 'row'
+		flexDirection: 'row',
+		shadowColor: '#000',
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 1,
+		elevation: 10
 	},
 	albumCoverStyle: {
 		width: 75,
@@ -82,20 +85,19 @@ const styles = {
 		padding: 10
 	},
 	trackTitleStyle: {
-		color: 'white'
+		color: ON_PRIMARY
 	},
 	trackArtistStyle: {
-		color: 'white'
+		color: ON_PRIMARY
 	},
 	trackAlbumStyle: {
-		color: 'white'
+		color: ON_PRIMARY
 	},
 	playPauseContainerStyle: {
 		alignItems: 'center', 
 		justifyContent: 'center', 
 		width: 75, 
-		height: 75, 
-		backgroundColor: '#404040'
+		height: 75
 	},
 	playPauseIconStyle: {
 		width: 50,
