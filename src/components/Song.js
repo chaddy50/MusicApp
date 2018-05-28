@@ -1,10 +1,13 @@
+//#region Imports
 import React, { Component } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { songAction } from '../actions';
 import { PRIMARY, DIVIDER } from '../themes/PurpleTeal/PurpleTeal';
+//#endregion
 
+//#region Song
 class Song extends Component {
 	render() {
 		const { song, songList, songIndex } = this.props;
@@ -24,15 +27,9 @@ class Song extends Component {
 		);
 	}
 }
+//#endregion
 
-const mapStateToProps = (state, props) => {
-	if (typeof (props.navigation) !== 'undefined') {
-		// Make sure we've got our navigation parameters on this.props
-		return { ...props.navigation.state.params };
-	}
-	return {};
-};
-
+//#region Styles
 const styles = {
 	touchableStyle: {
 		borderBottomWidth: 1,
@@ -57,5 +54,16 @@ const styles = {
 		flex: 1
 	}
 };
+//#endregion
+
+//#region MapStateToProps
+const mapStateToProps = (state, props) => {
+	if (typeof (props.navigation) !== 'undefined') {
+		// Make sure we've got our navigation parameters on this.props
+		return { ...props.navigation.state.params };
+	}
+	return {};
+};
+//#endregion
 
 export default connect(mapStateToProps, { songAction })(withNavigation(Song));

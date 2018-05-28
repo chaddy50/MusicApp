@@ -1,3 +1,4 @@
+//#region Imports
 import React, { Component } from 'react';
 import { ScrollView, ListView, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
@@ -6,7 +7,9 @@ import _ from 'lodash';
 import AlbumCard from './AlbumCard';
 import defaultAlbumCover from '../images/defaultAlbum.png';
 import { PRIMARY, BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
+//#endregion
 
+//#region AlbumList
 class AlbumList extends Component {
 
 	render() {
@@ -85,14 +88,18 @@ class AlbumList extends Component {
 		this.dataSource = ds.cloneWithRows(albumList);
 	}
 }
+//#endregion
 
+//#region Styles
 const styles = {
 	containerStyle: {
 		backgroundColor: BACKGROUND,
 		flex: 1
 	}
 };
+//#endregion
 
+//#region MapStateToProps
 const mapStateToProps = (state, props) => {
 	if (typeof (props.navigation) !== 'undefined') {
 		// Sort album list by year
@@ -105,5 +112,6 @@ const mapStateToProps = (state, props) => {
 	}
 	return { ...props };
 };
+//#endregion
 
 export default connect(mapStateToProps)(withNavigation(AlbumList));

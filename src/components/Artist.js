@@ -1,6 +1,9 @@
+//#region Imports
 import React, { Component } from 'react';
 import { TouchableCard } from './common';
+//#endregion
 
+//#region Artist
 class Artist extends Component {
 	render() {
 		const { artist } = this.props;
@@ -25,5 +28,6 @@ class Artist extends Component {
 		);
 	}
 }
+//#endregion
 
 export default Artist;

@@ -1,3 +1,4 @@
+//#region Imports
 import React, { Component } from 'react';
 import { 
 	View, 
@@ -16,7 +17,9 @@ import playIcon from '../images/play.png';
 import pauseIcon from '../images/pause.png';
 import { skipTrack } from '../actions';
 import { PRIMARY, ON_PRIMARY } from '../themes/PurpleTeal/PurpleTeal';
+//#endregion
 
+//#region NowPlayingBar
 class NowPlayingBar extends Component {
 	render() {
 		const { coverPath, playPauseIcon, isPlaying, isPaused, song } = this.props;
@@ -59,7 +62,9 @@ class NowPlayingBar extends Component {
 		LayoutAnimation.easeInEaseOut();
 	}
 }
+//#endregion
 
+//#region Styles
 const styles = {
 	barContainerStyle: {
 		width: '100%', 
@@ -104,7 +109,9 @@ const styles = {
 		height: 50
 	}
 };
+//#endregion
 
+//#region MapStateToProps
 const mapStateToProps = (state, props) => {
 	const { isPlaying, isPaused, curSong } = state.nowPlayingState;
 
@@ -129,5 +136,6 @@ const mapStateToProps = (state, props) => {
 
 	return { ...props, isPlaying, isPaused, playPauseIcon, coverPath, song: curSong };
 };
+//#endregion
 
 export default connect(mapStateToProps, { playPauseAction, skipTrack })(NowPlayingBar);

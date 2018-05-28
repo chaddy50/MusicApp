@@ -1,10 +1,13 @@
+//#region Imports
 import React, { Component } from 'react';
 import { ScrollView, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import Song from './Song';
 import { DIVIDER } from '../themes/PurpleTeal/PurpleTeal';
+//#endregion
 
+//#region Album
 class Album extends Component {
 	state = {
 		selectedAlbum: ''
@@ -42,7 +45,9 @@ class Album extends Component {
 		);
 	}
 }
+//#endregion
 
+//#region Styles
 const styles = {
 	albumInfoContainerStyle: {
 		alignItems: 'center',
@@ -63,12 +68,15 @@ const styles = {
 		fontSize: 14
 	}
 };
+//#endregion
 
+//#region MapStateToProps
 const mapStateToProps = (state, props) => {
 	if (typeof (props.navigation) !== 'undefined') {
 		return { ...props, ...props.navigation.state.params };
 	}
 	return { ...props };
 };
+//#endregion
 
 export default connect(mapStateToProps)(withNavigation(Album));

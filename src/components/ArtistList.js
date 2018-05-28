@@ -1,9 +1,12 @@
+//#region Imports
 import React, { Component } from 'react';
 import { ListView, View } from 'react-native';
 import _ from 'lodash';
 import Artist from './Artist';
 import { BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
+//#endregion
 
+//#region ArtistList
 class ArtistList extends Component {
 	render() {
 		return (
@@ -50,13 +53,15 @@ class ArtistList extends Component {
 		this.dataSource = ds.cloneWithRows(artistList);
 	}
 }
+//#endregion
 
+//#region Styles
 const styles = {
 	containerStyle: {
 		backgroundColor: BACKGROUND,
 		flex: 1
 	}
 };
-
+//#endregion
 
 export default ArtistList;
