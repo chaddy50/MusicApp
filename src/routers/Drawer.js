@@ -14,7 +14,7 @@ const Drawer = DrawerNavigator(
 			inactiveBackgroundColor: '#404040',
 			activeTintColor: '#FFF',
 			itemsContainerStyle: {
-				backgroundColor: '#404040',
+				backgroundColor: '#FFF',
 				flex: 1
 			},
 			indicatorStyle: {
