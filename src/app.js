@@ -32,11 +32,9 @@ class App extends Component {
 		const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 		return (
 			<Provider store={store}>
-				<View style={{ flex: 1 }}>
 					<View style={{ flex: 1 }}>
 						<Drawer />
 					</View>
-				</View>
 			</Provider>
 		);
 	}
