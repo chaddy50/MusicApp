@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
+import { ImageColorPicker } from 'react-native-image-color-picker';
 import Song from '../Song/Song';
 import { DIVIDER } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
@@ -13,12 +14,24 @@ class Album extends Component {
 		selectedAlbum: ''
 	}
 
+	colorPickerCallback = (message) => {
+		if (message && (message.nativeEvent && message.nativeEvent.data || message.promise)) {
+			const messageData = JSON.parse(message.nativeEvent && message.nativeEvent.data || message.promise);
+			if (messageData.message === 'imageColorPicker' && messageData.payload) {
+				const palettes = messageData.payload;
+				this.setState({ palettes, loadingPalettes: false });
+			}
+		}
+		debugger;
+	}
+
 	render() {
 		const { coverPath, name, year } = this.props;
 		const { albumInfoContainerStyle, albumCoverStyle, albumTitleStyle, albumYearStyle } = styles;
 
 		return (
 			<ScrollView>
+				<ImageColorPicker imageUrl={'/sdcard/Music/Incubus/S.C.I.E.N.C.E/cover.jpg'} pickerCallback={this.colorPickerCallback} />
 				<View style={albumInfoContainerStyle}>
 					<Image 
 						source={coverPath}

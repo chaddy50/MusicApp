@@ -27,12 +27,12 @@ class NowPlayingBar extends Component {
 
 		if (isPlaying || isPaused) {
 			return (
-				<GestureRecognizer onSwipeLeft={this.props.skipTrack}>
-					<View style={styles.barContainerStyle}>
-						<View style={{ flex: 1, height: 5, marginBottom: 5 }}>
-							<ProgressBar />
-						</View>
-						<View style={{ flexDirection: 'row' }}>
+				<View style={styles.barContainerStyle}>
+					<View style={styles.progressBarContainerStyle}>
+						<ProgressBar />
+					</View>
+					<GestureRecognizer onSwipeLeft={this.props.skipTrack}>
+						<View style={{ flexDirection: 'row', borderTopWidth: 1, borderColor: '#404040' }}>
 							<View>
 								<Image source={coverPath} style={styles.albumCoverStyle} />
 							</View>
@@ -47,8 +47,8 @@ class NowPlayingBar extends Component {
 								</TouchableWithoutFeedback>
 							</View>
 						</View>
-					</View>
-				</GestureRecognizer>
+					</GestureRecognizer>
+				</View>
 			);
 		}
 
@@ -66,17 +66,18 @@ class NowPlayingBar extends Component {
 
 //#region Styles
 const styles = {
+	progressBarContainerStyle: {
+		flex: 1,
+		height: 5,
+		marginBottom: 5
+	},
 	barContainerStyle: {
 		width: '100%', 
 		backgroundColor: PRIMARY, 
 		height: 80, 
 		position: 'absolute', 
 		bottom: 0,
-		flex: 1,
-		shadowColor: '#000',
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 1,
-		elevation: 10
+		flex: 1
 	},
 	albumCoverStyle: {
 		width: 75,

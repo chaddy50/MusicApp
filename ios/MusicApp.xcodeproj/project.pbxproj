@@ -40,6 +40,8 @@
 		1D3F1E3AEC364AACBF93023D /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35EE6EAF375C4A2A90A3F925 /* libRNFS.a */; };
 		168D1C7B9E474972B62314C8 /* libRNTrackPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FF99FDC8BB424987389218 /* libRNTrackPlayer.a */; };
 		3B24920CEEB34CF9A71768E3 /* libRNMusicMetadata.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92931399DB72427F95B0093F /* libRNMusicMetadata.a */; };
+		3DAD793AC79A4AC2A3AE7D8C /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE080E162F14D93A67E59B2 /* libRNFetchBlob.a */; };
+		F481F2E6C8364092BEEC8FFF /* libRNImageColorPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B5F6C5493143C2BCCB0880 /* libRNImageColorPicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -351,6 +353,10 @@
 		33FF99FDC8BB424987389218 /* libRNTrackPlayer.a */ = {isa = PBXFileReference; name = "libRNTrackPlayer.a"; path = "libRNTrackPlayer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		BA44ED502F1E4F5FB78A69EF /* RNMusicMetadata.xcodeproj */ = {isa = PBXFileReference; name = "RNMusicMetadata.xcodeproj"; path = "../node_modules/react-native-music-metadata/RNMusicMetadata.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		92931399DB72427F95B0093F /* libRNMusicMetadata.a */ = {isa = PBXFileReference; name = "libRNMusicMetadata.a"; path = "libRNMusicMetadata.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		07BA9291827D44E4B18014AE /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3DE080E162F14D93A67E59B2 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		93209F6965C74AC18EA50704 /* RNImageColorPicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImageColorPicker.xcodeproj"; path = "../node_modules/image-color-picker/ios/RNImageColorPicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		46B5F6C5493143C2BCCB0880 /* libRNImageColorPicker.a */ = {isa = PBXFileReference; name = "libRNImageColorPicker.a"; path = "libRNImageColorPicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +388,8 @@
 				1D3F1E3AEC364AACBF93023D /* libRNFS.a in Frameworks */,
 				168D1C7B9E474972B62314C8 /* libRNTrackPlayer.a in Frameworks */,
 				3B24920CEEB34CF9A71768E3 /* libRNMusicMetadata.a in Frameworks */,
+				3DAD793AC79A4AC2A3AE7D8C /* libRNFetchBlob.a in Frameworks */,
+				F481F2E6C8364092BEEC8FFF /* libRNImageColorPicker.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +580,8 @@
 				12CA99CE09824D7CBD19272F /* RNFS.xcodeproj */,
 				2A736E00331B473D8A7C634A /* RNTrackPlayer.xcodeproj */,
 				BA44ED502F1E4F5FB78A69EF /* RNMusicMetadata.xcodeproj */,
+				07BA9291827D44E4B18014AE /* RNFetchBlob.xcodeproj */,
+				93209F6965C74AC18EA50704 /* RNImageColorPicker.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1198,12 +1208,16 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicApp.app/MusicApp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-track-player\ios\RNTrackPlayer/**",
 					"$(SRCROOT)\..\node_modules\react-native-music-metadata\RNMusicMetadata",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\image-color-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1224,12 +1238,16 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicApp.app/MusicApp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-track-player\ios\RNTrackPlayer/**",
 					"$(SRCROOT)\..\node_modules\react-native-music-metadata\RNMusicMetadata",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\image-color-picker\ios",
 				);
 			};
 			name = Release;
@@ -1254,6 +1272,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-track-player\ios\RNTrackPlayer/**",
 					"$(SRCROOT)\..\node_modules\react-native-music-metadata\RNMusicMetadata",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\image-color-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1277,6 +1297,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-track-player\ios\RNTrackPlayer/**",
 					"$(SRCROOT)\..\node_modules\react-native-music-metadata\RNMusicMetadata",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\image-color-picker\ios",
 				);
 			};
 			name = Release;
@@ -1306,12 +1328,16 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-track-player\ios\RNTrackPlayer/**",
 					"$(SRCROOT)\..\node_modules\react-native-music-metadata\RNMusicMetadata",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\image-color-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1341,12 +1367,16 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-track-player\ios\RNTrackPlayer/**",
 					"$(SRCROOT)\..\node_modules\react-native-music-metadata\RNMusicMetadata",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\image-color-picker\ios",
 				);
 			};
 			name = Release;
@@ -1375,12 +1405,16 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-track-player\ios\RNTrackPlayer/**",
 					"$(SRCROOT)\..\node_modules\react-native-music-metadata\RNMusicMetadata",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\image-color-picker\ios",
 				);
 			};
 			name = Debug;
@@ -1409,12 +1443,16 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 					"$(SRCROOT)\..\node_modules\react-native-track-player\ios\RNTrackPlayer/**",
 					"$(SRCROOT)\..\node_modules\react-native-music-metadata\RNMusicMetadata",
+					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\image-color-picker\ios",
 				);
 			};
 			name = Release;

@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
 		case STOP:
 			return { ...state, isPlaying: false };
 		case RESET:
-			return INITIAL_STATE;
+			return { ...state, isPlaying: false };
 		default:
 			return state;
 	}

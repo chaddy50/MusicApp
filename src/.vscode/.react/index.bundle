@@ -1438,7 +1438,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   });
 
   _reactNativeTrackPlayer2.default.registerEventHandler(_require(_dependencyMap[3], './player-handler'));
-},11,[12,491,495,636],"index.js");
+},11,[12,491,495,665],"index.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   'use strict';
 
@@ -61745,24 +61745,12 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 								lineNumber: 35
 							}
 						},
-						_react3.default.createElement(
-							_reactNative.View,
-							{
-								style: {
-									flex: 1
-								},
-								__source: {
-									fileName: _jsxFileName,
-									lineNumber: 36
-								}
-							},
-							_react3.default.createElement(_Drawer2.default, {
-								__source: {
-									fileName: _jsxFileName,
-									lineNumber: 37
-								}
-							})
-						)
+						_react3.default.createElement(_Drawer2.default, {
+							__source: {
+								fileName: _jsxFileName,
+								lineNumber: 36
+							}
+						})
 					)
 				);
 			}
@@ -89496,7 +89484,9 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 				});
 
 			case _types.RESET:
-				return INITIAL_STATE;
+				return _extends({}, state, {
+					isPlaying: false
+				});
 
 			default:
 				return state;
@@ -108910,7 +108900,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(TabStack);
-},613,[118,179,12,510,539,614,618,627,631,616],"src\\routers\\RootStack.js");
+},613,[118,179,12,510,539,614,618,656,660,616],"src\\routers\\RootStack.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -109290,11 +109280,13 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
 	var _reactNavigation = _require(_dependencyMap[4], "react-navigation");
 
-	var _Song = _require(_dependencyMap[5], "../Song/Song");
+	var _reactNativeImageColorPicker = _require(_dependencyMap[5], "react-native-image-color-picker");
+
+	var _Song = _require(_dependencyMap[6], "../Song/Song");
 
 	var _Song2 = _interopRequireDefault(_Song);
 
-	var _PurpleTeal = _require(_dependencyMap[6], "../../themes/PurpleTeal/PurpleTeal");
+	var _PurpleTeal = _require(_dependencyMap[7], "../../themes/PurpleTeal/PurpleTeal");
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -109339,6 +109331,21 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
 			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Album.__proto__ || Object.getPrototypeOf(Album)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
 				selectedAlbum: ''
+			}, _this.colorPickerCallback = function (message) {
+				if (message && (message.nativeEvent && message.nativeEvent.data || message.promise)) {
+					var messageData = JSON.parse(message.nativeEvent && message.nativeEvent.data || message.promise);
+
+					if (messageData.message === 'imageColorPicker' && messageData.payload) {
+						var palettes = messageData.payload;
+
+						_this.setState({
+							palettes: palettes,
+							loadingPalettes: false
+						});
+					}
+				}
+
+				debugger;
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
 
@@ -109358,16 +109365,24 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 					{
 						__source: {
 							fileName: _jsxFileName,
-							lineNumber: 21
+							lineNumber: 33
 						}
 					},
+					_react3.default.createElement(_reactNativeImageColorPicker.ImageColorPicker, {
+						imageUrl: '/sdcard/Music/Incubus/S.C.I.E.N.C.E/cover.jpg',
+						pickerCallback: this.colorPickerCallback,
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 34
+						}
+					}),
 					_react3.default.createElement(
 						_reactNative.View,
 						{
 							style: albumInfoContainerStyle,
 							__source: {
 								fileName: _jsxFileName,
-								lineNumber: 22
+								lineNumber: 35
 							}
 						},
 						_react3.default.createElement(_reactNative.Image, {
@@ -109375,7 +109390,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 							style: albumCoverStyle,
 							__source: {
 								fileName: _jsxFileName,
-								lineNumber: 23
+								lineNumber: 36
 							}
 						}),
 						_react3.default.createElement(
@@ -109384,7 +109399,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 								style: albumTitleStyle,
 								__source: {
 									fileName: _jsxFileName,
-									lineNumber: 27
+									lineNumber: 40
 								}
 							},
 							name
@@ -109395,7 +109410,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 								style: albumYearStyle,
 								__source: {
 									fileName: _jsxFileName,
-									lineNumber: 28
+									lineNumber: 41
 								}
 							},
 							year
@@ -109416,7 +109431,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 						songIndex: index,
 						__source: {
 							fileName: _jsxFileName,
-							lineNumber: 39
+							lineNumber: 52
 						}
 					});
 				});
@@ -109457,7 +109472,4188 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactNavigation.withNavigation)(Album));
-},618,[118,179,12,510,539,619,616],"src\\components\\Album\\Album.js");
+},618,[118,179,12,510,539,619,649,616],"src\\components\\Album\\Album.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.ImageColorPicker = undefined;
+
+  var _imageColorPicker = _require(_dependencyMap[0], "./image-color-picker");
+
+  var _imageColorPicker2 = _interopRequireDefault(_imageColorPicker);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  exports.ImageColorPicker = _imageColorPicker2.default;
+},619,[620],"node_modules\\react-native-image-color-picker\\src\\index.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _react2 = _require(_dependencyMap[0], "react");
+
+  var _react3 = _interopRequireDefault(_react2);
+
+  var _index = _require(_dependencyMap[1], "./../../react-transform-hmr/lib/index.js");
+
+  var _index2 = _interopRequireDefault(_index);
+
+  var _jsxFileName = "C:\\Development\\React Native\\MusicApp\\node_modules\\react-native-image-color-picker\\src\\image-color-picker.js";
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _reactNative = _require(_dependencyMap[2], "react-native");
+
+  var _reactNativeFetchBlob = _require(_dependencyMap[3], "react-native-fetch-blob");
+
+  var _reactNativeFetchBlob2 = _interopRequireDefault(_reactNativeFetchBlob);
+
+  var _imageColorPicker = _require(_dependencyMap[4], "image-color-picker");
+
+  var _imageColorPicker2 = _interopRequireDefault(_imageColorPicker);
+
+  var _canvasHtml = _require(_dependencyMap[5], "./canvas-html");
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var _components = {
+    ImageColorPicker: {
+      displayName: "ImageColorPicker"
+    }
+  };
+
+  var _reactTransformHmrLibIndexJs2 = (0, _index2.default)({
+    filename: "C:/Development/React Native/MusicApp/node_modules/react-native-image-color-picker/src/image-color-picker.js",
+    components: _components,
+    locals: [module],
+    imports: [_react3.default]
+  });
+
+  function _wrapComponent(id) {
+    return function (Component) {
+      return _reactTransformHmrLibIndexJs2(Component, id);
+    };
+  }
+
+  function getColor(imagePath) {
+    return regeneratorRuntime.async(function getColor$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            return _context.abrupt("return", _imageColorPicker2.default.getColor(imagePath));
+
+          case 1:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, null, this);
+  }
+
+  var ImageColorPicker = _wrapComponent("ImageColorPicker")(function (_Component) {
+    _inherits(ImageColorPicker, _Component);
+
+    function ImageColorPicker() {
+      var _ref,
+          _this2 = this;
+
+      var _temp, _this, _ret;
+
+      _classCallCheck(this, ImageColorPicker);
+
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ImageColorPicker.__proto__ || Object.getPrototypeOf(ImageColorPicker)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+        imageBlob: ''
+      }, _this.getImage = function _callee(imageUrl) {
+        var localImage, colors, color, base64EncodedImage;
+        return regeneratorRuntime.async(function _callee$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return regeneratorRuntime.awrap(_reactNativeFetchBlob2.default.config({
+                  fileCache: true
+                }).fetch('GET', imageUrl));
+
+              case 3:
+                localImage = _context2.sent;
+
+                if (!(_reactNative.Platform.OS === 'android')) {
+                  _context2.next = 13;
+                  break;
+                }
+
+                debugger;
+                colors = [];
+                _context2.next = 9;
+                return regeneratorRuntime.awrap(getColor(localImage.path()));
+
+              case 9:
+                color = _context2.sent;
+                color.forEach(function (c) {
+                  colors.push(c.split('-'));
+                });
+
+                _this.imageColorPickerView.props.onMessage({
+                  promise: JSON.stringify({
+                    'message': 'imageColorPicker',
+                    'payload': colors
+                  })
+                });
+
+                return _context2.abrupt("return");
+
+              case 13:
+                _context2.next = 15;
+                return regeneratorRuntime.awrap(_reactNativeFetchBlob2.default.fs.readFile(localImage.path(), 'base64'));
+
+              case 15:
+                base64EncodedImage = _context2.sent;
+
+                _this.setState({
+                  imageBlob: base64EncodedImage
+                });
+
+                _context2.next = 22;
+                break;
+
+              case 19:
+                _context2.prev = 19;
+                _context2.t0 = _context2["catch"](0);
+
+                _this.props.pickerCallback(_context2.t0);
+
+              case 22:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, null, _this2, [[0, 19]]);
+      }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(ImageColorPicker, [{
+      key: "componentWillMount",
+      value: function componentWillMount() {
+        this.getImage(this.props.imageUrl);
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var _this3 = this;
+
+        var _props = this.props,
+            imageUrl = _props.imageUrl,
+            pickerCallback = _props.pickerCallback,
+            pickerStyle = _props.pickerStyle;
+        return _react3.default.createElement(_reactNative.WebView, {
+          ref: function ref(imageColorPickerView) {
+            return _this3.imageColorPickerView = imageColorPickerView;
+          },
+          source: {
+            html: (0, _canvasHtml.canvasHtml)(this.state.imageBlob, this.props)
+          },
+          javaScriptEnabled: true,
+          onMessage: pickerCallback,
+          style: pickerStyle,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 56
+          }
+        });
+      }
+    }]);
+
+    return ImageColorPicker;
+  }(_react2.Component));
+
+  exports.default = ImageColorPicker;
+},620,[118,179,12,621,647,648],"node_modules\\react-native-image-color-picker\\src\\image-color-picker.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  var _uri = _require(_dependencyMap[1], "./utils/uri");
+
+  var _uri2 = _interopRequireDefault(_uri);
+
+  var _StatefulPromise = _require(_dependencyMap[2], "./class/StatefulPromise.js");
+
+  var _StatefulPromise2 = _interopRequireDefault(_StatefulPromise);
+
+  var _fs = _require(_dependencyMap[3], "./fs");
+
+  var _fs2 = _interopRequireDefault(_fs);
+
+  var _uuid = _require(_dependencyMap[4], "./utils/uuid");
+
+  var _uuid2 = _interopRequireDefault(_uuid);
+
+  var _base = _require(_dependencyMap[5], "base-64");
+
+  var _base2 = _interopRequireDefault(_base);
+
+  var _polyfill = _require(_dependencyMap[6], "./polyfill");
+
+  var _polyfill2 = _interopRequireDefault(_polyfill);
+
+  var _lodash = _require(_dependencyMap[7], "lodash");
+
+  var _lodash2 = _interopRequireDefault(_lodash);
+
+  var _android = _require(_dependencyMap[8], "./android");
+
+  var _android2 = _interopRequireDefault(_android);
+
+  var _ios = _require(_dependencyMap[9], "./ios");
+
+  var _ios2 = _interopRequireDefault(_ios);
+
+  var _jsonStream = _require(_dependencyMap[10], "./json-stream");
+
+  var _jsonStream2 = _interopRequireDefault(_jsonStream);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+  var RNFetchBlobSession = _fs2.default.RNFetchBlobSession,
+      readStream = _fs2.default.readStream,
+      createFile = _fs2.default.createFile,
+      unlink = _fs2.default.unlink,
+      exists = _fs2.default.exists,
+      mkdir = _fs2.default.mkdir,
+      session = _fs2.default.session,
+      writeStream = _fs2.default.writeStream,
+      readFile = _fs2.default.readFile,
+      ls = _fs2.default.ls,
+      isDir = _fs2.default.isDir,
+      mv = _fs2.default.mv,
+      cp = _fs2.default.cp;
+  var Blob = _polyfill2.default.Blob;
+  var emitter = _reactNative.DeviceEventEmitter;
+  var RNFetchBlob = _reactNative.NativeModules.RNFetchBlob;
+
+  if (_reactNative.Platform.OS === 'ios') {
+    _reactNative.AppState.addEventListener('change', function (e) {
+      if (e === 'active') RNFetchBlob.emitExpiredEvent(function () {});
+    });
+  }
+
+  emitter.addListener("RNFetchBlobMessage", function (e) {
+    if (e.event === 'warn') {
+      console.warn(e.detail);
+    } else if (e.event === 'error') {
+      throw e.detail;
+    } else {
+      console.log("RNFetchBlob native message", e.detail);
+    }
+  });
+
+  if (!RNFetchBlob || !RNFetchBlob.fetchBlobForm || !RNFetchBlob.fetchBlob) {
+    console.warn('react-native-fetch-blob could not find valid native module.', 'please make sure you have linked native modules using `rnpm link`,', 'and restart RN packager or manually compile IOS/Android project.');
+  }
+
+  function wrap(path) {
+    return 'RNFetchBlob-file://' + path;
+  }
+
+  function config(options) {
+    return {
+      fetch: fetch.bind(options)
+    };
+  }
+
+  function fetchFile() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var method = arguments[1];
+    var url = arguments[2];
+    var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+    var body = arguments[4];
+
+    if (!_uri2.default.isFileURI(url)) {
+      throw "could not fetch file from an invalid URI : " + url;
+    }
+
+    url = _uri2.default.unwrapFileURI(url);
+    var promise = null;
+    var cursor = 0;
+    var total = -1;
+    var cacheData = '';
+    var info = null;
+
+    var _progress = void 0,
+        _uploadProgress = void 0,
+        _stateChange = void 0;
+
+    switch (method.toLowerCase()) {
+      case 'post':
+        break;
+
+      case 'put':
+        break;
+
+      default:
+        promise = _fs2.default.stat(url).then(function (stat) {
+          total = stat.size;
+          return _fs2.default.readStream(url, headers.encoding || 'utf8', Math.floor(headers.bufferSize) || 409600, Math.floor(headers.interval) || 100);
+        }).then(function (stream) {
+          return new Promise(function (resolve, reject) {
+            stream.open();
+            info = {
+              state: "2",
+              headers: {
+                'source': 'system-fs'
+              },
+              status: 200,
+              respType: 'text',
+              rnfbEncode: headers.encoding || 'utf8'
+            };
+
+            _stateChange(info);
+
+            stream.onData(function (chunk) {
+              _progress && _progress(cursor, total, chunk);
+              if (headers.noCache) return;
+              cacheData += chunk;
+            });
+            stream.onError(function (err) {
+              reject(err);
+            });
+            stream.onEnd(function () {
+              resolve(new FetchBlobResponse(null, info, cacheData));
+            });
+          });
+        });
+        break;
+    }
+
+    promise.progress = function (fn) {
+      _progress = fn;
+      return promise;
+    };
+
+    promise.stateChange = function (fn) {
+      _stateChange = fn;
+      return promise;
+    };
+
+    promise.uploadProgress = function (fn) {
+      _uploadProgress = fn;
+      return promise;
+    };
+
+    return promise;
+  }
+
+  function fetch() {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var taskId = (0, _uuid2.default)();
+    var options = this || {};
+    var subscription = void 0,
+        subscriptionUpload = void 0,
+        stateEvent = void 0,
+        partEvent = void 0;
+    var respInfo = {};
+
+    var _ref = [].concat(_toConsumableArray(args)),
+        method = _ref[0],
+        url = _ref[1],
+        headers = _ref[2],
+        body = _ref[3];
+
+    headers = _lodash2.default.reduce(headers, function (result, value, key) {
+      result[key] = value || '';
+      return result;
+    }, {});
+
+    if (_uri2.default.isFileURI(url)) {
+      return fetchFile(options, method, url, headers, body);
+    }
+
+    var promise = new Promise(function (resolve, reject) {
+      var nativeMethodName = Array.isArray(body) ? 'fetchBlobForm' : 'fetchBlob';
+      subscription = emitter.addListener('RNFetchBlobProgress', function (e) {
+        if (e.taskId === taskId && promise.onProgress) {
+          promise.onProgress(e.written, e.total, e.chunk);
+        }
+      });
+      subscriptionUpload = emitter.addListener('RNFetchBlobProgress-upload', function (e) {
+        if (e.taskId === taskId && promise.onUploadProgress) {
+          promise.onUploadProgress(e.written, e.total);
+        }
+      });
+      stateEvent = emitter.addListener('RNFetchBlobState', function (e) {
+        if (e.taskId === taskId) respInfo = e;
+        promise.onStateChange && promise.onStateChange(e);
+      });
+      subscription = emitter.addListener('RNFetchBlobExpire', function (e) {
+        if (e.taskId === taskId && promise.onExpire) {
+          promise.onExpire(e);
+        }
+      });
+      partEvent = emitter.addListener('RNFetchBlobServerPush', function (e) {
+        if (e.taskId === taskId && promise.onPartData) {
+          promise.onPartData(e.chunk);
+        }
+      });
+
+      if (body instanceof Blob && body.isRNFetchBlobPolyfill) {
+        body = body.getRNFetchBlobRef();
+      }
+
+      var req = RNFetchBlob[nativeMethodName];
+      req(options, taskId, method, url, headers || {}, body, function (err, rawType, data) {
+        subscription.remove();
+        subscriptionUpload.remove();
+        stateEvent.remove();
+        partEvent.remove();
+        delete promise['progress'];
+        delete promise['uploadProgress'];
+        delete promise['stateChange'];
+        delete promise['part'];
+        delete promise['cancel'];
+
+        promise.cancel = function () {};
+
+        if (err) reject(new Error(err, respInfo));else {
+          if (options.path || options.fileCache || options.addAndroidDownloads || options.key || options.auto && respInfo.respType === 'blob') {
+            if (options.session) session(options.session).add(data);
+          }
+
+          respInfo.rnfbEncode = rawType;
+          resolve(new FetchBlobResponse(taskId, respInfo, data));
+        }
+      });
+    });
+
+    promise.progress = function () {
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      var interval = 250;
+      var count = -1;
+
+      var fn = function fn() {};
+
+      if (args.length === 2) {
+        interval = args[0].interval || interval;
+        count = args[0].count || count;
+        fn = args[1];
+      } else {
+        fn = args[0];
+      }
+
+      promise.onProgress = fn;
+      RNFetchBlob.enableProgressReport(taskId, interval, count);
+      return promise;
+    };
+
+    promise.uploadProgress = function () {
+      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
+      }
+
+      var interval = 250;
+      var count = -1;
+
+      var fn = function fn() {};
+
+      if (args.length === 2) {
+        interval = args[0].interval || interval;
+        count = args[0].count || count;
+        fn = args[1];
+      } else {
+        fn = args[0];
+      }
+
+      promise.onUploadProgress = fn;
+      RNFetchBlob.enableUploadProgressReport(taskId, interval, count);
+      return promise;
+    };
+
+    promise.part = function (fn) {
+      promise.onPartData = fn;
+      return promise;
+    };
+
+    promise.stateChange = function (fn) {
+      promise.onStateChange = fn;
+      return promise;
+    };
+
+    promise.expire = function (fn) {
+      promise.onExpire = fn;
+      return promise;
+    };
+
+    promise.cancel = function (fn) {
+      fn = fn || function () {};
+
+      subscription.remove();
+      subscriptionUpload.remove();
+      stateEvent.remove();
+      RNFetchBlob.cancelRequest(taskId, fn);
+    };
+
+    promise.taskId = taskId;
+    return promise;
+  }
+
+  var FetchBlobResponse = function FetchBlobResponse(taskId, info, data) {
+    var _this = this;
+
+    _classCallCheck(this, FetchBlobResponse);
+
+    this.data = data;
+    this.taskId = taskId;
+    this.type = info.rnfbEncode;
+    this.respInfo = info;
+
+    this.info = function () {
+      return _this.respInfo;
+    };
+
+    this.array = function () {
+      var cType = info.headers['Content-Type'] || info.headers['content-type'];
+      return new Promise(function (resolve, reject) {
+        switch (_this.type) {
+          case 'base64':
+            break;
+
+          case 'path':
+            _fs2.default.readFile(_this.data, 'ascii').then(resolve);
+
+            break;
+
+          default:
+            break;
+        }
+      });
+    };
+
+    this.blob = function () {
+      var Blob = _polyfill2.default.Blob;
+      var cType = info.headers['Content-Type'] || info.headers['content-type'];
+      return new Promise(function (resolve, reject) {
+        switch (_this.type) {
+          case 'base64':
+            Blob.build(_this.data, {
+              type: cType + ';BASE64'
+            }).then(resolve);
+            break;
+
+          case 'path':
+            _polyfill2.default.Blob.build(wrap(_this.data), {
+              type: cType
+            }).then(resolve);
+
+            break;
+
+          default:
+            _polyfill2.default.Blob.build(_this.data, {
+              type: 'text/plain'
+            }).then(resolve);
+
+            break;
+        }
+      });
+    };
+
+    this.text = function () {
+      var res = _this.data;
+
+      switch (_this.type) {
+        case 'base64':
+          return _base2.default.decode(_this.data);
+
+        case 'path':
+          return _fs2.default.readFile(_this.data, 'base64').then(function (b64) {
+            return Promise.resolve(_base2.default.decode(b64));
+          });
+
+        default:
+          return _this.data;
+      }
+    };
+
+    this.json = function () {
+      switch (_this.type) {
+        case 'base64':
+          return JSON.parse(_base2.default.decode(_this.data));
+
+        case 'path':
+          return _fs2.default.readFile(_this.data, 'utf8').then(function (text) {
+            return Promise.resolve(JSON.parse(text));
+          });
+
+        default:
+          return JSON.parse(_this.data);
+      }
+    };
+
+    this.base64 = function () {
+      switch (_this.type) {
+        case 'base64':
+          return _this.data;
+
+        case 'path':
+          return _fs2.default.readFile(_this.data, 'base64');
+
+        default:
+          return _base2.default.encode(_this.data);
+      }
+    };
+
+    this.flush = function () {
+      var path = _this.path();
+
+      if (!path || _this.type !== 'path') return;
+      return unlink(path);
+    };
+
+    this.path = function () {
+      if (_this.type === 'path') return _this.data;
+      return null;
+    };
+
+    this.session = function (name) {
+      if (_this.type === 'path') return session(name).add(_this.data);else {
+        console.warn('only file paths can be add into session.');
+        return null;
+      }
+    };
+
+    this.readStream = function (encode) {
+      if (_this.type === 'path') {
+        return readStream(_this.data, encode);
+      } else {
+        console.warn('RNFetchblob', 'this response data does not contains any available stream');
+        return null;
+      }
+    };
+
+    this.readFile = function (encode) {
+      if (_this.type === 'path') {
+        encode = encode || 'utf8';
+        return readFile(_this.data, encode);
+      } else {
+        console.warn('RNFetchblob', 'this response does not contains a readable file');
+        return null;
+      }
+    };
+  };
+
+  exports.default = {
+    fetch: fetch,
+    base64: _base2.default,
+    android: _android2.default,
+    ios: _ios2.default,
+    config: config,
+    session: session,
+    fs: _fs2.default,
+    wrap: wrap,
+    polyfill: _polyfill2.default,
+    JSONStream: _jsonStream2.default
+  };
+},621,[12,622,623,624,628,630,631,537,643,644,645],"node_modules\\react-native-fetch-blob\\index.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = {
+    isFileURI: function isFileURI(uri) {
+      if (typeof uri !== 'string') return false;
+      return (/^RNFetchBlob-file\:\/\//.test(uri)
+      );
+    },
+    isJSONStreamURI: function isJSONStreamURI(uri) {
+      if (typeof uri !== 'string') return false;
+      return (/^JSONStream\:\/\//.test(uri)
+      );
+    },
+    removeURIScheme: function removeURIScheme(uri, iterations) {
+      iterations = iterations || 1;
+      var result = uri;
+
+      for (var i = 0; i < iterations; i++) {
+        result = String(result).replace(/^[^\:]+\:\/\//, '');
+      }
+
+      return String(result);
+    },
+    unwrapFileURI: function unwrapFileURI(uri) {
+      return String(uri).replace(/^RNFetchBlob-file\:\/\//, '');
+    }
+  };
+},622,[],"node_modules\\react-native-fetch-blob\\utils\\uri.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var StatefulPromise = function (_Promise) {
+    _inherits(StatefulPromise, _Promise);
+
+    function StatefulPromise() {
+      _classCallCheck(this, StatefulPromise);
+
+      return _possibleConstructorReturn(this, (StatefulPromise.__proto__ || Object.getPrototypeOf(StatefulPromise)).apply(this, arguments));
+    }
+
+    return StatefulPromise;
+  }(Promise);
+
+  exports.default = StatefulPromise;
+},623,[],"node_modules\\react-native-fetch-blob\\class\\StatefulPromise.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  var _RNFetchBlobSession = _require(_dependencyMap[1], "./class/RNFetchBlobSession");
+
+  var _RNFetchBlobSession2 = _interopRequireDefault(_RNFetchBlobSession);
+
+  var _RNFetchBlobWriteStream = _require(_dependencyMap[2], "./class/RNFetchBlobWriteStream");
+
+  var _RNFetchBlobWriteStream2 = _interopRequireDefault(_RNFetchBlobWriteStream);
+
+  var _RNFetchBlobReadStream = _require(_dependencyMap[3], "./class/RNFetchBlobReadStream");
+
+  var _RNFetchBlobReadStream2 = _interopRequireDefault(_RNFetchBlobReadStream);
+
+  var _RNFetchBlobFile = _require(_dependencyMap[4], "./class/RNFetchBlobFile");
+
+  var _RNFetchBlobFile2 = _interopRequireDefault(_RNFetchBlobFile);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  var RNFetchBlob = _reactNative.NativeModules.RNFetchBlob;
+  var emitter = _reactNative.DeviceEventEmitter;
+  var dirs = {
+    DocumentDir: RNFetchBlob.DocumentDir,
+    CacheDir: RNFetchBlob.CacheDir,
+    PictureDir: RNFetchBlob.PictureDir,
+    MusicDir: RNFetchBlob.MusicDir,
+    MovieDir: RNFetchBlob.MovieDir,
+    DownloadDir: RNFetchBlob.DownloadDir,
+    DCIMDir: RNFetchBlob.DCIMDir,
+    SDCardDir: RNFetchBlob.SDCardDir,
+    SDCardApplicationDir: RNFetchBlob.SDCardApplicationDir,
+    MainBundleDir: RNFetchBlob.MainBundleDir,
+    LibraryDir: RNFetchBlob.LibraryDir
+  };
+
+  function session(name) {
+    var s = _RNFetchBlobSession2.default.getSession(name);
+
+    if (s) return new _RNFetchBlobSession2.default(name);else {
+      _RNFetchBlobSession2.default.setSession(name, []);
+
+      return new _RNFetchBlobSession2.default(name, []);
+    }
+  }
+
+  function asset(path) {
+    if (_reactNative.Platform.OS === 'ios') {
+      if (/^assets-library\:\/\//.test(path)) return path;
+    }
+
+    return 'bundle-assets://' + path;
+  }
+
+  function createFile(path, data, encoding) {
+    encoding = encoding || 'utf8';
+    return new Promise(function (resolve, reject) {
+      var handler = function handler(err) {
+        if (err) reject(new Error(err));else resolve();
+      };
+
+      if (encoding.toLowerCase() === 'ascii') {
+        if (Array.isArray(data)) RNFetchBlob.createFileASCII(path, data, handler);else reject(new Error('`data` of ASCII file must be an array contains numbers'));
+      } else {
+        RNFetchBlob.createFile(path, data, encoding, handler);
+      }
+    });
+  }
+
+  function writeStream(path, encoding, append) {
+    if (!path) throw Error('RNFetchBlob could not open file stream with empty `path`');
+    encoding = encoding || 'utf8';
+    append = append || false;
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.writeStream(path, encoding || 'base64', append || false, function (err, streamId) {
+        if (err) reject(new Error(err));else resolve(new _RNFetchBlobWriteStream2.default(streamId, encoding));
+      });
+    });
+  }
+
+  function readStream(path, encoding, bufferSize) {
+    var tick = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 10;
+    return Promise.resolve(new _RNFetchBlobReadStream2.default(path, encoding, bufferSize, tick));
+  }
+
+  function mkdir(path) {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.mkdir(path, function (err, res) {
+        if (err) reject(new Error(err));else resolve();
+      });
+    });
+  }
+
+  function pathForAppGroup(groupName) {
+    return RNFetchBlob.pathForAppGroup(groupName);
+  }
+
+  function readFile(path, encoding, bufferSize) {
+    if (typeof path !== 'string') return Promise.reject(new Error('Invalid argument "path" '));
+    return RNFetchBlob.readFile(path, encoding);
+  }
+
+  function writeFile(path, data, encoding) {
+    encoding = encoding || 'utf8';
+    if (typeof path !== 'string') return Promise.reject('Invalid argument "path" ');
+
+    if (encoding.toLocaleLowerCase() === 'ascii') {
+      if (!Array.isArray(data)) return Promise.reject(new Error("Expected \"data\" is an Array when encoding is \"ascii\", however got " + typeof data));else return RNFetchBlob.writeFileArray(path, data, false);
+    } else {
+      if (typeof data !== 'string') return Promise.reject(new Error("Expected \"data\" is a String when encoding is \"utf8\" or \"base64\", however got " + typeof data));else return RNFetchBlob.writeFile(path, encoding, data, false);
+    }
+  }
+
+  function appendFile(path, data, encoding) {
+    encoding = encoding || 'utf8';
+    if (typeof path !== 'string') return Promise.reject('Invalid argument "path" ');
+
+    if (encoding.toLocaleLowerCase() === 'ascii') {
+      if (!Array.isArray(data)) return Promise.reject(new Error("Expected \"data\" is an Array when encoding is \"ascii\", however got " + typeof data));else return RNFetchBlob.writeFileArray(path, data, true);
+    } else {
+      if (typeof data !== 'string') return Promise.reject(new Error("Expected \"data\" is a String when encoding is \"utf8\" or \"base64\", however got " + typeof data));else return RNFetchBlob.writeFile(path, encoding, data, true);
+    }
+  }
+
+  function stat(path) {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.stat(path, function (err, stat) {
+        if (err) reject(new Error(err));else {
+          if (stat) {
+            stat.size = parseInt(stat.size);
+            stat.lastModified = parseInt(stat.lastModified);
+          }
+
+          resolve(stat);
+        }
+      });
+    });
+  }
+
+  function scanFile(pairs) {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.scanFile(pairs, function (err) {
+        if (err) reject(new Error(err));else resolve();
+      });
+    });
+  }
+
+  function cp(path, dest) {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.cp(path, dest, function (err, res) {
+        if (err) reject(new Error(err));else resolve(res);
+      });
+    });
+  }
+
+  function mv(path, dest) {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.mv(path, dest, function (err, res) {
+        if (err) reject(new Error(err));else resolve(res);
+      });
+    });
+  }
+
+  function lstat(path) {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.lstat(path, function (err, stat) {
+        if (err) reject(new Error(err));else resolve(stat);
+      });
+    });
+  }
+
+  function ls(path) {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.ls(path, function (err, res) {
+        if (err) reject(new Error(err));else resolve(res);
+      });
+    });
+  }
+
+  function unlink(path) {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.unlink(path, function (err) {
+        if (err) {
+          reject(new Error(err));
+        } else resolve();
+      });
+    });
+  }
+
+  function exists(path) {
+    return new Promise(function (resolve, reject) {
+      try {
+        RNFetchBlob.exists(path, function (exist) {
+          resolve(exist);
+        });
+      } catch (err) {
+        reject(new Error(err));
+      }
+    });
+  }
+
+  function slice(src, dest, start, end) {
+    var p = Promise.resolve();
+    var size = 0;
+
+    function normalize(num, size) {
+      if (num < 0) return Math.max(0, size + num);
+      if (!num && num !== 0) return size;
+      return num;
+    }
+
+    if (start < 0 || end < 0 || !start || !end) {
+      p = p.then(function () {
+        return stat(src);
+      }).then(function (stat) {
+        size = Math.floor(stat.size);
+        start = normalize(start || 0, size);
+        end = normalize(end, size);
+        return Promise.resolve();
+      });
+    }
+
+    return p.then(function () {
+      return RNFetchBlob.slice(src, dest, start, end);
+    });
+  }
+
+  function isDir(path) {
+    return new Promise(function (resolve, reject) {
+      try {
+        RNFetchBlob.exists(path, function (exist, isDir) {
+          resolve(isDir);
+        });
+      } catch (err) {
+        reject(new Error(err));
+      }
+    });
+  }
+
+  function df() {
+    return new Promise(function (resolve, reject) {
+      RNFetchBlob.df(function (err, stat) {
+        if (err) reject(err);else resolve(stat);
+      });
+    });
+  }
+
+  exports.default = {
+    RNFetchBlobSession: _RNFetchBlobSession2.default,
+    unlink: unlink,
+    mkdir: mkdir,
+    session: session,
+    ls: ls,
+    readStream: readStream,
+    mv: mv,
+    cp: cp,
+    writeStream: writeStream,
+    writeFile: writeFile,
+    appendFile: appendFile,
+    pathForAppGroup: pathForAppGroup,
+    readFile: readFile,
+    exists: exists,
+    createFile: createFile,
+    isDir: isDir,
+    stat: stat,
+    lstat: lstat,
+    scanFile: scanFile,
+    dirs: dirs,
+    slice: slice,
+    asset: asset,
+    df: df
+  };
+},624,[12,625,626,627,629],"node_modules\\react-native-fetch-blob\\fs.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var RNFetchBlob = _reactNative.NativeModules.RNFetchBlob;
+  var emitter = _reactNative.DeviceEventEmitter;
+  var sessions = {};
+
+  var RNFetchBlobSession = function () {
+    _createClass(RNFetchBlobSession, null, [{
+      key: "getSession",
+      value: function getSession(name) {
+        return sessions[name];
+      }
+    }, {
+      key: "setSession",
+      value: function setSession(name, val) {
+        sessions[name] = val;
+      }
+    }, {
+      key: "removeSession",
+      value: function removeSession(name) {
+        delete sessions[name];
+      }
+    }]);
+
+    function RNFetchBlobSession(name, list) {
+      _classCallCheck(this, RNFetchBlobSession);
+
+      this.name = name;
+
+      if (!sessions[name]) {
+        if (Array.isArray(list)) sessions[name] = list;else sessions[name] = [];
+      }
+    }
+
+    _createClass(RNFetchBlobSession, [{
+      key: "add",
+      value: function add(path) {
+        sessions[this.name].push(path);
+        return this;
+      }
+    }, {
+      key: "remove",
+      value: function remove(path) {
+        var list = sessions[this.name];
+
+        for (var i in list) {
+          if (list[i] === path) {
+            sessions[this.name].splice(i, 1);
+            break;
+          }
+        }
+
+        return this;
+      }
+    }, {
+      key: "list",
+      value: function list() {
+        return sessions[this.name];
+      }
+    }, {
+      key: "dispose",
+      value: function dispose() {
+        var _this = this;
+
+        return new Promise(function (resolve, reject) {
+          RNFetchBlob.removeSession(sessions[_this.name], function (err) {
+            if (err) reject(err);else {
+              delete sessions[_this.name];
+              resolve();
+            }
+          });
+        });
+      }
+    }]);
+
+    return RNFetchBlobSession;
+  }();
+
+  exports.default = RNFetchBlobSession;
+},625,[12],"node_modules\\react-native-fetch-blob\\class\\RNFetchBlobSession.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var RNFetchBlob = _reactNative.NativeModules.RNFetchBlob;
+  var emitter = _reactNative.DeviceEventEmitter;
+
+  var RNFetchBlobWriteStream = function () {
+    function RNFetchBlobWriteStream(streamId, encoding, append) {
+      _classCallCheck(this, RNFetchBlobWriteStream);
+
+      this.id = streamId;
+      this.encoding = encoding;
+      this.append = append;
+    }
+
+    _createClass(RNFetchBlobWriteStream, [{
+      key: "write",
+      value: function write(data) {
+        var _this = this;
+
+        return new Promise(function (resolve, reject) {
+          try {
+            var method = _this.encoding === 'ascii' ? 'writeArrayChunk' : 'writeChunk';
+
+            if (_this.encoding.toLocaleLowerCase() === 'ascii' && !Array.isArray(data)) {
+              reject('ascii input data must be an Array');
+              return;
+            }
+
+            RNFetchBlob[method](_this.id, data, function (error) {
+              if (error) reject(error);else resolve();
+            });
+          } catch (err) {
+            reject(err);
+          }
+        });
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        var _this2 = this;
+
+        return new Promise(function (resolve, reject) {
+          try {
+            RNFetchBlob.closeStream(_this2.id, function () {
+              resolve();
+            });
+          } catch (err) {
+            reject(err);
+          }
+        });
+      }
+    }]);
+
+    return RNFetchBlobWriteStream;
+  }();
+
+  exports.default = RNFetchBlobWriteStream;
+},626,[12],"node_modules\\react-native-fetch-blob\\class\\RNFetchBlobWriteStream.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  var _uuid = _require(_dependencyMap[1], "../utils/uuid");
+
+  var _uuid2 = _interopRequireDefault(_uuid);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var RNFetchBlob = _reactNative.NativeModules.RNFetchBlob;
+  var emitter = _reactNative.DeviceEventEmitter;
+
+  var RNFetchBlobReadStream = function () {
+    function RNFetchBlobReadStream(path, encoding, bufferSize, tick) {
+      var _this = this;
+
+      _classCallCheck(this, RNFetchBlobReadStream);
+
+      this.tick = 10;
+      if (!path) throw Error('RNFetchBlob could not open file stream with empty `path`');
+      this.encoding = encoding || 'utf8';
+      this.bufferSize = bufferSize;
+      this.path = path;
+      this.closed = false;
+      this.tick = tick;
+
+      this._onData = function () {};
+
+      this._onEnd = function () {};
+
+      this._onError = function () {};
+
+      this.streamId = 'RNFBRS' + (0, _uuid2.default)();
+      var subscription = emitter.addListener(this.streamId, function (e) {
+        var event = e.event,
+            detail = e.detail;
+
+        if (_this._onData && event === 'data') {
+          _this._onData(detail);
+
+          return;
+        } else if (_this._onEnd && event === 'end') {
+          _this._onEnd(detail);
+        } else {
+          if (_this._onError) _this._onError(detail);else throw new Error(detail);
+        }
+
+        if (event === 'error' || event === 'end') {
+          subscription.remove();
+          _this.closed = true;
+        }
+      });
+    }
+
+    _createClass(RNFetchBlobReadStream, [{
+      key: "open",
+      value: function open() {
+        if (!this.closed) RNFetchBlob.readStream(this.path, this.encoding, this.bufferSize || 10240, this.tick || -1, this.streamId);else throw new Error('Stream closed');
+      }
+    }, {
+      key: "onData",
+      value: function onData(fn) {
+        this._onData = fn;
+      }
+    }, {
+      key: "onError",
+      value: function onError(fn) {
+        this._onError = fn;
+      }
+    }, {
+      key: "onEnd",
+      value: function onEnd(fn) {
+        this._onEnd = fn;
+      }
+    }]);
+
+    return RNFetchBlobReadStream;
+  }();
+
+  exports.default = RNFetchBlobReadStream;
+},627,[12,628],"node_modules\\react-native-fetch-blob\\class\\RNFetchBlobReadStream.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = getUUID;
+
+  function getUUID() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  }
+},628,[],"node_modules\\react-native-fetch-blob\\utils\\uuid.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var RNFetchBlob = _reactNative.NativeModules.RNFetchBlob;
+  var emitter = _reactNative.DeviceEventEmitter;
+
+  var RNFetchBlobFile = function RNFetchBlobFile() {
+    _classCallCheck(this, RNFetchBlobFile);
+  };
+
+  exports.default = RNFetchBlobFile;
+},629,[12],"node_modules\\react-native-fetch-blob\\class\\RNFetchBlobFile.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+	;
+
+	(function (root) {
+		var freeExports = typeof exports == 'object' && exports;
+		var freeModule = typeof module == 'object' && module && module.exports == freeExports && module;
+		var freeGlobal = typeof global == 'object' && global;
+
+		if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal) {
+			root = freeGlobal;
+		}
+
+		var InvalidCharacterError = function InvalidCharacterError(message) {
+			this.message = message;
+		};
+
+		InvalidCharacterError.prototype = new Error();
+		InvalidCharacterError.prototype.name = 'InvalidCharacterError';
+
+		var error = function error(message) {
+			throw new InvalidCharacterError(message);
+		};
+
+		var TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+		var REGEX_SPACE_CHARACTERS = /[\t\n\f\r ]/g;
+
+		var decode = function decode(input) {
+			input = String(input).replace(REGEX_SPACE_CHARACTERS, '');
+			var length = input.length;
+
+			if (length % 4 == 0) {
+				input = input.replace(/==?$/, '');
+				length = input.length;
+			}
+
+			if (length % 4 == 1 || /[^+a-zA-Z0-9/]/.test(input)) {
+				error('Invalid character: the string to be decoded is not correctly encoded.');
+			}
+
+			var bitCounter = 0;
+			var bitStorage;
+			var buffer;
+			var output = '';
+			var position = -1;
+
+			while (++position < length) {
+				buffer = TABLE.indexOf(input.charAt(position));
+				bitStorage = bitCounter % 4 ? bitStorage * 64 + buffer : buffer;
+
+				if (bitCounter++ % 4) {
+					output += String.fromCharCode(0xFF & bitStorage >> (-2 * bitCounter & 6));
+				}
+			}
+
+			return output;
+		};
+
+		var encode = function encode(input) {
+			input = String(input);
+
+			if (/[^\0-\xFF]/.test(input)) {
+				error('The string to be encoded contains characters outside of the ' + 'Latin1 range.');
+			}
+
+			var padding = input.length % 3;
+			var output = '';
+			var position = -1;
+			var a;
+			var b;
+			var c;
+			var d;
+			var buffer;
+			var length = input.length - padding;
+
+			while (++position < length) {
+				a = input.charCodeAt(position) << 16;
+				b = input.charCodeAt(++position) << 8;
+				c = input.charCodeAt(++position);
+				buffer = a + b + c;
+				output += TABLE.charAt(buffer >> 18 & 0x3F) + TABLE.charAt(buffer >> 12 & 0x3F) + TABLE.charAt(buffer >> 6 & 0x3F) + TABLE.charAt(buffer & 0x3F);
+			}
+
+			if (padding == 2) {
+				a = input.charCodeAt(position) << 8;
+				b = input.charCodeAt(++position);
+				buffer = a + b;
+				output += TABLE.charAt(buffer >> 10) + TABLE.charAt(buffer >> 4 & 0x3F) + TABLE.charAt(buffer << 2 & 0x3F) + '=';
+			} else if (padding == 1) {
+				buffer = input.charCodeAt(position);
+				output += TABLE.charAt(buffer >> 2) + TABLE.charAt(buffer << 4 & 0x3F) + '==';
+			}
+
+			return output;
+		};
+
+		var base64 = {
+			'encode': encode,
+			'decode': decode,
+			'version': '0.1.0'
+		};
+
+		if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+			define(function () {
+				return base64;
+			});
+		} else if (freeExports && !freeExports.nodeType) {
+			if (freeModule) {
+				freeModule.exports = base64;
+			} else {
+				for (var key in base64) {
+					base64.hasOwnProperty(key) && (freeExports[key] = base64[key]);
+				}
+			}
+		} else {
+			root.base64 = base64;
+		}
+	})(this);
+},630,[],"node_modules\\base-64\\base64.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _Blob = _require(_dependencyMap[0], "./Blob.js");
+
+  var _Blob2 = _interopRequireDefault(_Blob);
+
+  var _File = _require(_dependencyMap[1], "./File.js");
+
+  var _File2 = _interopRequireDefault(_File);
+
+  var _XMLHttpRequest = _require(_dependencyMap[2], "./XMLHttpRequest.js");
+
+  var _XMLHttpRequest2 = _interopRequireDefault(_XMLHttpRequest);
+
+  var _ProgressEvent = _require(_dependencyMap[3], "./ProgressEvent");
+
+  var _ProgressEvent2 = _interopRequireDefault(_ProgressEvent);
+
+  var _Event = _require(_dependencyMap[4], "./Event");
+
+  var _Event2 = _interopRequireDefault(_Event);
+
+  var _FileReader = _require(_dependencyMap[5], "./FileReader");
+
+  var _FileReader2 = _interopRequireDefault(_FileReader);
+
+  var _Fetch = _require(_dependencyMap[6], "./Fetch");
+
+  var _Fetch2 = _interopRequireDefault(_Fetch);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  exports.default = {
+    Blob: _Blob2.default,
+    File: _File2.default,
+    XMLHttpRequest: _XMLHttpRequest2.default,
+    ProgressEvent: _ProgressEvent2.default,
+    Event: _Event2.default,
+    FileReader: _FileReader2.default,
+    Fetch: _Fetch2.default
+  };
+},631,[632,635,636,638,639,640,641],"node_modules\\react-native-fetch-blob\\polyfill\\index.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _index = _require(_dependencyMap[0], "../index.js");
+
+  var _index2 = _interopRequireDefault(_index);
+
+  var _fs = _require(_dependencyMap[1], "../fs.js");
+
+  var _fs2 = _interopRequireDefault(_fs);
+
+  var _uuid = _require(_dependencyMap[2], "../utils/uuid");
+
+  var _uuid2 = _interopRequireDefault(_uuid);
+
+  var _log = _require(_dependencyMap[3], "../utils/log.js");
+
+  var _log2 = _interopRequireDefault(_log);
+
+  var _EventTarget2 = _require(_dependencyMap[4], "./EventTarget");
+
+  var _EventTarget3 = _interopRequireDefault(_EventTarget2);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var log = new _log2.default('Blob');
+  var blobCacheDir = _fs2.default.dirs.DocumentDir + '/RNFetchBlob-blobs/';
+  log.disable();
+
+  var Blob = function (_EventTarget) {
+    _inherits(Blob, _EventTarget);
+
+    _createClass(Blob, [{
+      key: "blobPath",
+      get: function get() {
+        return this._ref;
+      }
+    }], [{
+      key: "clearCache",
+      value: function clearCache() {
+        return _fs2.default.unlink(blobCacheDir).then(function () {
+          return _fs2.default.mkdir(blobCacheDir);
+        });
+      }
+    }, {
+      key: "build",
+      value: function build(data, cType) {
+        return new Promise(function (resolve, reject) {
+          new Blob(data, cType).onCreated(resolve);
+        });
+      }
+    }, {
+      key: "setLog",
+      value: function setLog(level) {
+        if (level === -1) log.disable();else log.level(level);
+      }
+    }]);
+
+    function Blob(data, cType, defer) {
+      _classCallCheck(this, Blob);
+
+      var _this = _possibleConstructorReturn(this, (Blob.__proto__ || Object.getPrototypeOf(Blob)).call(this));
+
+      _this.isRNFetchBlobPolyfill = true;
+      _this.multipartBoundary = null;
+      _this._ref = null;
+      _this._blobCreated = false;
+      _this._onCreated = [];
+      _this._closed = false;
+      cType = cType || {};
+      _this.cacheName = getBlobName();
+      _this.isRNFetchBlobPolyfill = true;
+      _this.isDerived = defer;
+      _this.type = cType.type || 'text/plain';
+      log.verbose('Blob constructor called', 'mime', _this.type, 'type', typeof data, 'length', data ? data.length : 0);
+      _this._ref = blobCacheDir + _this.cacheName;
+      var p = null;
+      if (!data) data = '';
+
+      if (data.isRNFetchBlobPolyfill) {
+        log.verbose('create Blob cache file from Blob object');
+        var size = 0;
+        _this._ref = String(data.getRNFetchBlobRef());
+        var orgPath = _this._ref;
+        p = _fs2.default.exists(orgPath).then(function (exist) {
+          if (exist) return _fs2.default.writeFile(orgPath, data, 'uri').then(function (size) {
+            return Promise.resolve(size);
+          }).catch(function (err) {
+            throw "RNFetchBlob Blob file creation error, " + err;
+          });else throw "could not create Blob from path " + orgPath + ", file not exists";
+        });
+      } else if (data instanceof FormData) {
+          log.verbose('create Blob cache file from FormData', data);
+          var boundary = "RNFetchBlob-" + _this.cacheName + "-" + Date.now();
+          _this.multipartBoundary = boundary;
+          var parts = data.getParts();
+          var formArray = [];
+
+          if (!parts) {
+            p = _fs2.default.writeFile(_this._ref, '', 'utf8');
+          } else {
+            for (var i in parts) {
+              formArray.push('\r\n--' + boundary + '\r\n');
+              var part = parts[i];
+
+              for (var j in part.headers) {
+                formArray.push(j + ': ' + part.headers[j] + '\r\n');
+              }
+
+              formArray.push('\r\n');
+              if (part.isRNFetchBlobPolyfill) formArray.push(part);else formArray.push(part.string);
+            }
+
+            log.verbose('FormData array', formArray);
+            formArray.push('\r\n--' + boundary + '--\r\n');
+            p = createMixedBlobData(_this._ref, formArray);
+          }
+        } else if (typeof data === 'string' && data.startsWith('RNFetchBlob-file://')) {
+            log.verbose('create Blob cache file from file path', data);
+            _this._isReference = true;
+            _this._ref = String(data).replace('RNFetchBlob-file://', '');
+            var _orgPath = _this._ref;
+            if (defer) return _possibleConstructorReturn(_this);else {
+              p = _fs2.default.stat(_orgPath).then(function (stat) {
+                return Promise.resolve(stat.size);
+              });
+            }
+          } else if (typeof data === 'string') {
+              var encoding = 'utf8';
+              var mime = String(_this.type);
+              if (/(application\/octet|\;base64)/i.test(mime)) encoding = 'base64';else data = data.toString();
+              _this.type = String(_this.type).replace(/;base64/ig, '');
+              log.verbose('create Blob cache file from string', 'encode', encoding);
+              p = _fs2.default.writeFile(_this._ref, data, encoding).then(function (size) {
+                return Promise.resolve(size);
+              });
+            } else if (Array.isArray(data)) {
+                log.verbose('create Blob cache file from mixed array', data);
+                p = createMixedBlobData(_this._ref, data);
+              } else {
+                data = data.toString();
+                p = _fs2.default.writeFile(_this._ref, data, 'utf8').then(function (size) {
+                  return Promise.resolve(size);
+                });
+              }
+
+      p && p.then(function (size) {
+        _this.size = size;
+
+        _this._invokeOnCreateEvent();
+      }).catch(function (err) {
+        log.error('RNFetchBlob could not create Blob : ' + _this._ref, err);
+      });
+      return _this;
+    }
+
+    _createClass(Blob, [{
+      key: "onCreated",
+      value: function onCreated(fn) {
+        log.verbose('#register blob onCreated', this._blobCreated);
+        if (!this._blobCreated) this._onCreated.push(fn);else {
+          fn(this);
+        }
+        return this;
+      }
+    }, {
+      key: "markAsDerived",
+      value: function markAsDerived() {
+        this._isDerived = true;
+      }
+    }, {
+      key: "getRNFetchBlobRef",
+      value: function getRNFetchBlobRef() {
+        return this._ref;
+      }
+    }, {
+      key: "slice",
+      value: function slice(start, end) {
+        var _this2 = this;
+
+        var contentType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+        if (this._closed) throw 'Blob has been released.';
+        log.verbose('slice called', start, end, contentType);
+        var resPath = blobCacheDir + getBlobName();
+        var pass = false;
+        log.debug('fs.slice new blob will at', resPath);
+        var result = new Blob(_index2.default.wrap(resPath), {
+          type: contentType
+        }, true);
+
+        _fs2.default.exists(blobCacheDir).then(function (exist) {
+          if (exist) return Promise.resolve();
+          return _fs2.default.mkdir(blobCacheDir);
+        }).then(function () {
+          return _fs2.default.slice(_this2._ref, resPath, start, end);
+        }).then(function (dest) {
+          log.debug('fs.slice done', dest);
+
+          result._invokeOnCreateEvent();
+
+          pass = true;
+        }).catch(function (err) {
+          console.warn('Blob.slice failed:', err);
+          pass = true;
+        });
+
+        log.debug('slice returning new Blob');
+        return result;
+      }
+    }, {
+      key: "readBlob",
+      value: function readBlob(encoding) {
+        if (this._closed) throw 'Blob has been released.';
+        return _fs2.default.readFile(this._ref, encoding || 'utf8');
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        if (this._closed) return Promise.reject('Blob has been released.');
+        this._closed = true;
+        return _fs2.default.unlink(this._ref).catch(function (err) {
+          console.warn(err);
+        });
+      }
+    }, {
+      key: "safeClose",
+      value: function safeClose() {
+        if (this._closed) return Promise.reject('Blob has been released.');
+        this._closed = true;
+
+        if (!this._isReference) {
+          return _fs2.default.unlink(this._ref).catch(function (err) {
+            console.warn(err);
+          });
+        } else {
+          return Promise.resolve();
+        }
+      }
+    }, {
+      key: "_invokeOnCreateEvent",
+      value: function _invokeOnCreateEvent() {
+        log.verbose('invoke create event', this._onCreated);
+        this._blobCreated = true;
+        var fns = this._onCreated;
+
+        for (var i in fns) {
+          if (typeof fns[i] === 'function') {
+            fns[i](this);
+          }
+        }
+
+        delete this._onCreated;
+      }
+    }, {
+      key: "isDerived",
+      get: function get() {
+        return this._isDerived || false;
+      }
+    }]);
+
+    return Blob;
+  }(_EventTarget3.default);
+
+  exports.default = Blob;
+
+  function getBlobName() {
+    return 'blob-' + (0, _uuid2.default)();
+  }
+
+  function createMixedBlobData(ref, dataArray) {
+    var p = _fs2.default.writeFile(ref, '');
+
+    var args = [];
+    var size = 0;
+
+    for (var i in dataArray) {
+      var part = dataArray[i];
+      if (!part) continue;
+
+      if (part.isRNFetchBlobPolyfill) {
+        args.push([ref, part._ref, 'uri']);
+      } else if (typeof part === 'string') args.push([ref, part, 'utf8']);else if (Array.isArray(part)) args.push([ref, part, 'ascii']);
+    }
+
+    var _loop = function _loop(_i) {
+      p = p.then(function (written) {
+        var arg = this;
+        if (written) size += written;
+        log.verbose('mixed blob write', args[_i], written);
+        return _fs2.default.appendFile.apply(_fs2.default, _toConsumableArray(arg));
+      }.bind(args[_i]));
+    };
+
+    for (var _i in args) {
+      _loop(_i);
+    }
+
+    return p.then(function () {
+      return Promise.resolve(size);
+    });
+  }
+},632,[621,624,628,633,634],"node_modules\\react-native-fetch-blob\\polyfill\\Blob.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var Log = function () {
+    function Log(name) {
+      _classCallCheck(this, Log);
+
+      this._isEnable = true;
+      this._level = 0;
+      this._name = name;
+    }
+
+    _createClass(Log, [{
+      key: "level",
+      value: function level(val) {
+        this._isEnable = true;
+        this._level = val;
+      }
+    }, {
+      key: "enable",
+      value: function enable() {
+        this._isEnable = true;
+      }
+    }, {
+      key: "disable",
+      value: function disable() {
+        this._isEnable = false;
+      }
+    }, {
+      key: "verbose",
+      value: function verbose() {
+        var _console;
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+
+        this._isEnable && this._level > 2 && (_console = console).log.apply(_console, [this._name, 'verbose:'].concat(args));
+      }
+    }, {
+      key: "debug",
+      value: function debug() {
+        var _console2;
+
+        for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
+        }
+
+        this._isEnable && this._level > 1 && (_console2 = console).log.apply(_console2, [this._name, 'debug:'].concat(args));
+      }
+    }, {
+      key: "info",
+      value: function info() {
+        var _console3;
+
+        for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+          args[_key3] = arguments[_key3];
+        }
+
+        this._isEnable && this._level > 0 && (_console3 = console).log.apply(_console3, [this._name, 'info:'].concat(args));
+      }
+    }, {
+      key: "error",
+      value: function error() {
+        var _console4;
+
+        for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          args[_key4] = arguments[_key4];
+        }
+
+        this._isEnable && this._level > -1 && (_console4 = console).warn.apply(_console4, [this._name, 'error:'].concat(args));
+      }
+    }]);
+
+    return Log;
+  }();
+
+  exports.default = Log;
+},633,[],"node_modules\\react-native-fetch-blob\\utils\\log.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _log = _require(_dependencyMap[0], "../utils/log.js");
+
+  var _log2 = _interopRequireDefault(_log);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var log = new _log2.default('EventTarget');
+  log.disable();
+
+  var EventTarget = function () {
+    function EventTarget() {
+      _classCallCheck(this, EventTarget);
+
+      log.info('constructor called');
+      this.listeners = {};
+    }
+
+    _createClass(EventTarget, [{
+      key: "addEventListener",
+      value: function addEventListener(type, cb) {
+        log.info('add event listener', type, cb);
+
+        if (!(type in this.listeners)) {
+          this.listeners[type] = [];
+        }
+
+        this.listeners[type].push(cb);
+      }
+    }, {
+      key: "removeEventListener",
+      value: function removeEventListener(type, cb) {
+        log.info('remove event listener', type, cb);
+        if (!(type in this.listeners)) return;
+        var handlers = this.listeners[type];
+
+        for (var i in handlers) {
+          if (cb === handlers[i]) {
+            handlers.splice(i, 1);
+            return this.removeEventListener(type, cb);
+          }
+        }
+      }
+    }, {
+      key: "dispatchEvent",
+      value: function dispatchEvent(type, event) {
+        log.info('dispatch event', event);
+        if (!(type in this.listeners)) return;
+        var handlers = this.listeners[type];
+
+        for (var i in handlers) {
+          handlers[i].call(this, event);
+        }
+      }
+    }, {
+      key: "clearEventListeners",
+      value: function clearEventListeners() {
+        for (var i in this.listeners) {
+          delete this.listeners[i];
+        }
+      }
+    }]);
+
+    return EventTarget;
+  }();
+
+  exports.default = EventTarget;
+},634,[633],"node_modules\\react-native-fetch-blob\\polyfill\\EventTarget.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _fs = _require(_dependencyMap[0], "../fs.js");
+
+  var _fs2 = _interopRequireDefault(_fs);
+
+  var _Blob2 = _require(_dependencyMap[1], "./Blob.js");
+
+  var _Blob3 = _interopRequireDefault(_Blob2);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var File = function (_Blob) {
+    _inherits(File, _Blob);
+
+    _createClass(File, null, [{
+      key: "build",
+      value: function build(name, data, cType) {
+        return new Promise(function (resolve, reject) {
+          new File(data, cType).onCreated(function (f) {
+            f.name = name;
+            resolve(f);
+          });
+        });
+      }
+    }]);
+
+    function File(data, cType) {
+      _classCallCheck(this, File);
+
+      var _this = _possibleConstructorReturn(this, (File.__proto__ || Object.getPrototypeOf(File)).call(this, data, cType));
+
+      _this.name = '';
+      return _this;
+    }
+
+    return File;
+  }(_Blob3.default);
+
+  exports.default = File;
+},635,[624,632],"node_modules\\react-native-fetch-blob\\polyfill\\File.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _index = _require(_dependencyMap[0], "../index.js");
+
+  var _index2 = _interopRequireDefault(_index);
+
+  var _XMLHttpRequestEventTarget = _require(_dependencyMap[1], "./XMLHttpRequestEventTarget.js");
+
+  var _XMLHttpRequestEventTarget2 = _interopRequireDefault(_XMLHttpRequestEventTarget);
+
+  var _log = _require(_dependencyMap[2], "../utils/log.js");
+
+  var _log2 = _interopRequireDefault(_log);
+
+  var _Blob = _require(_dependencyMap[3], "./Blob.js");
+
+  var _Blob2 = _interopRequireDefault(_Blob);
+
+  var _ProgressEvent = _require(_dependencyMap[4], "./ProgressEvent.js");
+
+  var _ProgressEvent2 = _interopRequireDefault(_ProgressEvent);
+
+  var _uri = _require(_dependencyMap[5], "../utils/uri");
+
+  var _uri2 = _interopRequireDefault(_uri);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var log = new _log2.default('XMLHttpRequest');
+  log.disable();
+  var UNSENT = 0;
+  var OPENED = 1;
+  var HEADERS_RECEIVED = 2;
+  var LOADING = 3;
+  var DONE = 4;
+
+  var XMLHttpRequest = function (_XMLHttpRequestEventT) {
+    _inherits(XMLHttpRequest, _XMLHttpRequestEventT);
+
+    _createClass(XMLHttpRequest, [{
+      key: "UNSENT",
+      get: function get() {
+        return UNSENT;
+      }
+    }, {
+      key: "OPENED",
+      get: function get() {
+        return OPENED;
+      }
+    }, {
+      key: "HEADERS_RECEIVED",
+      get: function get() {
+        return HEADERS_RECEIVED;
+      }
+    }, {
+      key: "LOADING",
+      get: function get() {
+        return LOADING;
+      }
+    }, {
+      key: "DONE",
+      get: function get() {
+        return DONE;
+      }
+    }], [{
+      key: "setLog",
+      value: function setLog(level) {
+        if (level === -1) log.disable();else log.level(level);
+      }
+    }, {
+      key: "addBinaryContentType",
+      value: function addBinaryContentType(substr) {
+        for (var i in XMLHttpRequest.binaryContentTypes) {
+          if (new RegExp(substr, 'i').test(XMLHttpRequest.binaryContentTypes[i])) {
+            return;
+          }
+        }
+
+        XMLHttpRequest.binaryContentTypes.push(substr);
+      }
+    }, {
+      key: "removeBinaryContentType",
+      value: function removeBinaryContentType(val) {
+        for (var i in XMLHttpRequest.binaryContentTypes) {
+          if (new RegExp(substr, 'i').test(XMLHttpRequest.binaryContentTypes[i])) {
+            XMLHttpRequest.binaryContentTypes.splice(i, 1);
+            return;
+          }
+        }
+      }
+    }, {
+      key: "UNSENT",
+      get: function get() {
+        return UNSENT;
+      }
+    }, {
+      key: "OPENED",
+      get: function get() {
+        return OPENED;
+      }
+    }, {
+      key: "HEADERS_RECEIVED",
+      get: function get() {
+        return HEADERS_RECEIVED;
+      }
+    }, {
+      key: "LOADING",
+      get: function get() {
+        return LOADING;
+      }
+    }, {
+      key: "DONE",
+      get: function get() {
+        return DONE;
+      }
+    }]);
+
+    function XMLHttpRequest() {
+      _classCallCheck(this, XMLHttpRequest);
+
+      log.verbose('XMLHttpRequest constructor called');
+
+      var _this = _possibleConstructorReturn(this, (XMLHttpRequest.__proto__ || Object.getPrototypeOf(XMLHttpRequest)).call(this));
+
+      _this.upload = new _XMLHttpRequestEventTarget2.default();
+      _this._readyState = UNSENT;
+      _this._uriType = 'net';
+      _this._response = '';
+      _this._responseText = '';
+      _this._responseHeaders = {};
+      _this._responseType = '';
+      _this._responseURL = '';
+      _this._responseXML = '';
+      _this._status = 0;
+      _this._statusText = '';
+      _this._timeout = 60000;
+      _this._sendFlag = false;
+      _this._uploadStarted = false;
+      _this._increment = false;
+      _this._config = {};
+      _this._headers = {
+        'Content-Type': 'text/plain'
+      };
+      _this._cleanUp = null;
+
+      _this._headerReceived = function (e) {
+        log.debug('header received ', _this._task.taskId, e);
+        _this.responseURL = _this._url;
+
+        if (e.state === "2" && e.taskId === _this._task.taskId) {
+          _this._responseHeaders = e.headers;
+          _this._statusText = e.status;
+          _this._status = Math.floor(e.status);
+
+          _this._dispatchReadStateChange(XMLHttpRequest.HEADERS_RECEIVED);
+        }
+      };
+
+      _this._uploadProgressEvent = function (send, total) {
+        if (!_this._uploadStarted) {
+          _this.upload.dispatchEvent('loadstart');
+
+          _this._uploadStarted = true;
+        }
+
+        if (send >= total) _this.upload.dispatchEvent('load');
+
+        _this.upload.dispatchEvent('progress', new _ProgressEvent2.default(true, send, total));
+      };
+
+      _this._progressEvent = function (send, total, chunk) {
+        log.verbose(_this.readyState);
+        if (_this._readyState === XMLHttpRequest.HEADERS_RECEIVED) _this._dispatchReadStateChange(XMLHttpRequest.LOADING);
+        var lengthComputable = false;
+        if (total && total >= 0) lengthComputable = true;
+        var e = new _ProgressEvent2.default(lengthComputable, send, total);
+
+        if (_this._increment) {
+          _this._responseText += chunk;
+        }
+
+        _this.dispatchEvent('progress', e);
+      };
+
+      _this._onError = function (err) {
+        var statusCode = Math.floor(_this.status);
+
+        if (statusCode >= 100 && statusCode !== 408) {
+          return;
+        }
+
+        log.debug('XMLHttpRequest error', err);
+        _this._statusText = err;
+        _this._status = String(err).match(/\d+/);
+        _this._status = _this._status ? Math.floor(_this.status) : 404;
+
+        _this._dispatchReadStateChange(XMLHttpRequest.DONE);
+
+        if (err && String(err.message).match(/(timed\sout|timedout)/) || _this._status == 408) {
+          _this.dispatchEvent('timeout');
+        }
+
+        _this.dispatchEvent('loadend');
+
+        _this.dispatchEvent('error', {
+          type: 'error',
+          detail: err
+        });
+
+        _this.clearEventListeners();
+      };
+
+      _this._onDone = function (resp) {
+        log.debug('XMLHttpRequest done', _this._url, resp, _this);
+        _this._statusText = _this._status;
+
+        var responseDataReady = function responseDataReady() {
+          log.debug('request done state = 4');
+
+          _this.dispatchEvent('load');
+
+          _this.dispatchEvent('loadend');
+
+          _this._dispatchReadStateChange(XMLHttpRequest.DONE);
+
+          _this.clearEventListeners();
+        };
+
+        if (resp) {
+          var info = resp.respInfo || {};
+          log.debug(_this._url, info, info.respType);
+
+          switch (_this._responseType) {
+            case 'blob':
+              resp.blob().then(function (b) {
+                _this._responseText = resp.text();
+                _this._response = b;
+                responseDataReady();
+              });
+              break;
+
+            case 'arraybuffer':
+              break;
+
+            case 'json':
+              _this._response = resp.json();
+              _this._responseText = resp.text();
+              break;
+
+            default:
+              _this._responseText = resp.text();
+              _this._response = _this.responseText;
+              responseDataReady();
+              break;
+          }
+        }
+      };
+
+      return _this;
+    }
+
+    _createClass(XMLHttpRequest, [{
+      key: "open",
+      value: function open(method, url, async, user, password) {
+        log.verbose('XMLHttpRequest open ', method, url, async, user, password);
+        this._method = method;
+        this._url = url;
+        this._headers = {};
+        this._increment = _uri2.default.isJSONStreamURI(this._url);
+        this._url = this._url.replace(/^JSONStream\:\/\//, '');
+
+        this._dispatchReadStateChange(XMLHttpRequest.OPENED);
+      }
+    }, {
+      key: "send",
+      value: function send(body) {
+        var _this2 = this;
+
+        this._body = body;
+        if (this._readyState !== XMLHttpRequest.OPENED) throw 'InvalidStateError : XMLHttpRequest is not opened yet.';
+        var promise = Promise.resolve();
+        this._sendFlag = true;
+        log.verbose('XMLHttpRequest send ', body);
+        var _method = this._method,
+            _url = this._url,
+            _headers = this._headers;
+        log.verbose('sending request with args', _method, _url, _headers, body);
+        log.verbose(typeof body, body instanceof FormData);
+
+        if (body instanceof _Blob2.default) {
+          log.debug('sending blob body', body._blobCreated);
+          promise = new Promise(function (resolve, reject) {
+            body.onCreated(function (blob) {
+              if (blob.isDerived) {
+                _this2._cleanUp = function () {
+                  blob.close();
+                };
+              }
+
+              log.debug('body created send request');
+              body = _index2.default.wrap(blob.getRNFetchBlobRef());
+              resolve();
+            });
+          });
+        } else if (typeof body === 'object') {
+          body = JSON.stringify(body);
+          promise = Promise.resolve();
+        } else {
+          body = body ? body.toString() : body;
+          promise = Promise.resolve();
+        }
+
+        promise.then(function () {
+          log.debug('send request invoke', body);
+
+          for (var h in _headers) {
+            _headers[h] = _headers[h].toString();
+          }
+
+          _this2._task = _index2.default.config({
+            auto: true,
+            timeout: _this2._timeout,
+            increment: _this2._increment,
+            binaryContentTypes: XMLHttpRequest.binaryContentTypes
+          }).fetch(_method, _url, _headers, body);
+
+          _this2._task.stateChange(_this2._headerReceived).uploadProgress(_this2._uploadProgressEvent).progress(_this2._progressEvent).catch(_this2._onError).then(_this2._onDone);
+        });
+      }
+    }, {
+      key: "overrideMimeType",
+      value: function overrideMimeType(mime) {
+        log.verbose('XMLHttpRequest overrideMimeType', mime);
+        this._headers['Content-Type'] = mime;
+      }
+    }, {
+      key: "setRequestHeader",
+      value: function setRequestHeader(name, value) {
+        log.verbose('XMLHttpRequest set header', name, value);
+
+        if (this._readyState !== OPENED || this._sendFlag) {
+          throw "InvalidStateError : Calling setRequestHeader in wrong state  " + this._readyState;
+        }
+
+        if (typeof name !== 'string' || /[^\u0000-\u00ff]/.test(name)) {
+          throw 'TypeError : header field name should be a string';
+        }
+
+        var invalidPatterns = [/[\(\)\>\<\@\,\:\\\/\[\]\?\=\}\{\s\ \u007f\;\t\0\v\r]/, /tt/];
+
+        for (var i in invalidPatterns) {
+          if (invalidPatterns[i].test(name) || typeof name !== 'string') {
+            throw "SyntaxError : Invalid header field name " + name;
+          }
+        }
+
+        this._headers[name] = value;
+      }
+    }, {
+      key: "abort",
+      value: function abort() {
+        var _this3 = this;
+
+        log.verbose('XMLHttpRequest abort ');
+        if (!this._task) return;
+
+        this._task.cancel(function (err) {
+          var e = {
+            timeStamp: Date.now()
+          };
+          if (_this3.onabort) _this3.onabort();
+
+          if (err) {
+            e.detail = err;
+            e.type = 'error';
+
+            _this3.dispatchEvent('error', e);
+          } else {
+            e.type = 'abort';
+
+            _this3.dispatchEvent('abort', e);
+          }
+        });
+      }
+    }, {
+      key: "getResponseHeader",
+      value: function getResponseHeader(field) {
+        log.verbose('XMLHttpRequest get header', field, this._responseHeaders);
+        if (!this._responseHeaders) return null;
+        return this._responseHeaders[field] || this._responseHeaders[field.toLowerCase()] || null;
+      }
+    }, {
+      key: "getAllResponseHeaders",
+      value: function getAllResponseHeaders() {
+        log.verbose('XMLHttpRequest get all headers', this._responseHeaders);
+        if (!this._responseHeaders) return '';
+        var result = '';
+        var respHeaders = this.responseHeaders;
+
+        for (var i in respHeaders) {
+          result += i + ": " + respHeaders[i] + String.fromCharCode(0x0D, 0x0A);
+        }
+
+        return result.substr(0, result.length - 2);
+      }
+    }, {
+      key: "_dispatchReadStateChange",
+      value: function _dispatchReadStateChange(state) {
+        this._readyState = state;
+        if (typeof this._onreadystatechange === 'function') this._onreadystatechange();
+      }
+    }, {
+      key: "onreadystatechange",
+      set: function set(fn) {
+        log.verbose('XMLHttpRequest set onreadystatechange', fn);
+        this._onreadystatechange = fn;
+      },
+      get: function get() {
+        return this._onreadystatechange;
+      }
+    }, {
+      key: "readyState",
+      get: function get() {
+        log.verbose('get readyState', this._readyState);
+        return this._readyState;
+      }
+    }, {
+      key: "status",
+      get: function get() {
+        log.verbose('get status', this._status);
+        return this._status;
+      }
+    }, {
+      key: "statusText",
+      get: function get() {
+        log.verbose('get statusText', this._statusText);
+        return this._statusText;
+      }
+    }, {
+      key: "response",
+      get: function get() {
+        log.verbose('get response', this._response);
+        return this._response;
+      }
+    }, {
+      key: "responseText",
+      get: function get() {
+        log.verbose('get responseText', this._responseText);
+        return this._responseText;
+      }
+    }, {
+      key: "responseURL",
+      get: function get() {
+        log.verbose('get responseURL', this._responseURL);
+        return this._responseURL;
+      }
+    }, {
+      key: "responseHeaders",
+      get: function get() {
+        log.verbose('get responseHeaders', this._responseHeaders);
+        return this._responseHeaders;
+      }
+    }, {
+      key: "timeout",
+      set: function set(val) {
+        this._timeout = val * 1000;
+        log.verbose('set timeout', this._timeout);
+      },
+      get: function get() {
+        log.verbose('get timeout', this._timeout);
+        return this._timeout;
+      }
+    }, {
+      key: "responseType",
+      set: function set(val) {
+        log.verbose('set response type', this._responseType);
+        this._responseType = val;
+      },
+      get: function get() {
+        log.verbose('get response type', this._responseType);
+        return this._responseType;
+      }
+    }], [{
+      key: "isRNFBPolyfill",
+      get: function get() {
+        return true;
+      }
+    }]);
+
+    return XMLHttpRequest;
+  }(_XMLHttpRequestEventTarget2.default);
+
+  XMLHttpRequest.binaryContentTypes = ['image/', 'video/', 'audio/'];
+  exports.default = XMLHttpRequest;
+},636,[621,637,633,632,638,622],"node_modules\\react-native-fetch-blob\\polyfill\\XMLHttpRequest.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+  var _EventTarget2 = _require(_dependencyMap[0], "./EventTarget.js");
+
+  var _EventTarget3 = _interopRequireDefault(_EventTarget2);
+
+  var _log = _require(_dependencyMap[1], "../utils/log.js");
+
+  var _log2 = _interopRequireDefault(_log);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var log = new _log2.default('XMLHttpRequestEventTarget');
+  log.disable();
+
+  var XMLHttpRequestEventTarget = function (_EventTarget) {
+    _inherits(XMLHttpRequestEventTarget, _EventTarget);
+
+    function XMLHttpRequestEventTarget() {
+      _classCallCheck(this, XMLHttpRequestEventTarget);
+
+      var _this = _possibleConstructorReturn(this, (XMLHttpRequestEventTarget.__proto__ || Object.getPrototypeOf(XMLHttpRequestEventTarget)).call(this));
+
+      _this._onabort = function () {};
+
+      _this._onerror = function () {};
+
+      _this._onload = function () {};
+
+      _this._onloadstart = function () {};
+
+      _this._onprogress = function () {};
+
+      _this._ontimeout = function () {};
+
+      _this._onloadend = function () {};
+
+      log.info('constructor called');
+      return _this;
+    }
+
+    _createClass(XMLHttpRequestEventTarget, [{
+      key: "dispatchEvent",
+      value: function dispatchEvent(event, e) {
+        log.debug('dispatch event', event, e);
+
+        _get(XMLHttpRequestEventTarget.prototype.__proto__ || Object.getPrototypeOf(XMLHttpRequestEventTarget.prototype), "dispatchEvent", this).call(this, event, e);
+
+        switch (event) {
+          case 'abort':
+            this._onabort(e);
+
+            break;
+
+          case 'error':
+            this._onerror(e);
+
+            break;
+
+          case 'load':
+            this._onload(e);
+
+            break;
+
+          case 'loadstart':
+            this._onloadstart(e);
+
+            break;
+
+          case 'loadend':
+            this._onloadend(e);
+
+            break;
+
+          case 'progress':
+            this._onprogress(e);
+
+            break;
+
+          case 'timeout':
+            this._ontimeout(e);
+
+            break;
+        }
+      }
+    }, {
+      key: "onabort",
+      set: function set(fn) {
+        log.info('set onabort');
+        this._onabort = fn;
+      },
+      get: function get() {
+        return this._onabort;
+      }
+    }, {
+      key: "onerror",
+      set: function set(fn) {
+        log.info('set onerror');
+        this._onerror = fn;
+      },
+      get: function get() {
+        return this._onerror;
+      }
+    }, {
+      key: "onload",
+      set: function set(fn) {
+        log.info('set onload', fn);
+        this._onload = fn;
+      },
+      get: function get() {
+        return this._onload;
+      }
+    }, {
+      key: "onloadstart",
+      set: function set(fn) {
+        log.info('set onloadstart');
+        this._onloadstart = fn;
+      },
+      get: function get() {
+        return this._onloadstart;
+      }
+    }, {
+      key: "onprogress",
+      set: function set(fn) {
+        log.info('set onprogress');
+        this._onprogress = fn;
+      },
+      get: function get() {
+        return this._onprogress;
+      }
+    }, {
+      key: "ontimeout",
+      set: function set(fn) {
+        log.info('set ontimeout');
+        this._ontimeout = fn;
+      },
+      get: function get() {
+        return this._ontimeout;
+      }
+    }, {
+      key: "onloadend",
+      set: function set(fn) {
+        log.info('set onloadend');
+        this._onloadend = fn;
+      },
+      get: function get() {
+        return this._onloadend;
+      }
+    }]);
+
+    return XMLHttpRequestEventTarget;
+  }(_EventTarget3.default);
+
+  exports.default = XMLHttpRequestEventTarget;
+},637,[634,633],"node_modules\\react-native-fetch-blob\\polyfill\\XMLHttpRequestEventTarget.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _Event2 = _require(_dependencyMap[0], "./Event");
+
+  var _Event3 = _interopRequireDefault(_Event2);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var ProgressEvent = function (_Event) {
+    _inherits(ProgressEvent, _Event);
+
+    function ProgressEvent(lengthComputable, loaded, total) {
+      _classCallCheck(this, ProgressEvent);
+
+      var _this = _possibleConstructorReturn(this, (ProgressEvent.__proto__ || Object.getPrototypeOf(ProgressEvent)).call(this));
+
+      _this._lengthComputable = false;
+      _this._loaded = -1;
+      _this._total = -1;
+      _this._lengthComputable = lengthComputable;
+      _this._loaded = loaded;
+      _this._total = total;
+      return _this;
+    }
+
+    _createClass(ProgressEvent, [{
+      key: "lengthComputable",
+      get: function get() {
+        return this._lengthComputable;
+      }
+    }, {
+      key: "loaded",
+      get: function get() {
+        return this._loaded;
+      }
+    }, {
+      key: "total",
+      get: function get() {
+        return this._total;
+      }
+    }]);
+
+    return ProgressEvent;
+  }(_Event3.default);
+
+  exports.default = ProgressEvent;
+},638,[639],"node_modules\\react-native-fetch-blob\\polyfill\\ProgressEvent.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var Event = function Event() {
+    _classCallCheck(this, Event);
+  };
+
+  exports.default = Event;
+},639,[],"node_modules\\react-native-fetch-blob\\polyfill\\Event.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _index = _require(_dependencyMap[0], "../index.js");
+
+  var _index2 = _interopRequireDefault(_index);
+
+  var _ProgressEvent = _require(_dependencyMap[1], "./ProgressEvent.js");
+
+  var _ProgressEvent2 = _interopRequireDefault(_ProgressEvent);
+
+  var _EventTarget2 = _require(_dependencyMap[2], "./EventTarget");
+
+  var _EventTarget3 = _interopRequireDefault(_EventTarget2);
+
+  var _Blob = _require(_dependencyMap[3], "./Blob");
+
+  var _Blob2 = _interopRequireDefault(_Blob);
+
+  var _log = _require(_dependencyMap[4], "../utils/log.js");
+
+  var _log2 = _interopRequireDefault(_log);
+
+  var _fs = _require(_dependencyMap[5], "../fs");
+
+  var _fs2 = _interopRequireDefault(_fs);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+  var log = new _log2.default('FileReader');
+  log.level(3);
+
+  var FileReader = function (_EventTarget) {
+    _inherits(FileReader, _EventTarget);
+
+    _createClass(FileReader, [{
+      key: "isRNFBPolyFill",
+      get: function get() {
+        return true;
+      }
+    }], [{
+      key: "EMPTY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "LOADING",
+      get: function get() {
+        return 1;
+      }
+    }, {
+      key: "DONE",
+      get: function get() {
+        return 2;
+      }
+    }]);
+
+    function FileReader() {
+      _classCallCheck(this, FileReader);
+
+      var _this = _possibleConstructorReturn(this, (FileReader.__proto__ || Object.getPrototypeOf(FileReader)).call(this));
+
+      _this._readState = 0;
+      log.verbose('file reader const');
+      _this._result = null;
+      return _this;
+    }
+
+    _createClass(FileReader, [{
+      key: "abort",
+      value: function abort() {
+        log.verbose('abort');
+      }
+    }, {
+      key: "readAsArrayBuffer",
+      value: function readAsArrayBuffer(b) {
+        log.verbose('readAsArrayBuffer', b);
+      }
+    }, {
+      key: "readAsBinaryString",
+      value: function readAsBinaryString(b) {
+        log.verbose('readAsBinaryString', b);
+      }
+    }, {
+      key: "readAsText",
+      value: function readAsText(b, label) {
+        log.verbose('readAsText', b, label);
+      }
+    }, {
+      key: "readAsDataURL",
+      value: function readAsDataURL(b) {
+        log.verbose('readAsDataURL', b);
+      }
+    }, {
+      key: "dispatchEvent",
+      value: function dispatchEvent(event, e) {
+        log.verbose('dispatch event', event, e);
+
+        _get(FileReader.prototype.__proto__ || Object.getPrototypeOf(FileReader.prototype), "dispatchEvent", this).call(this, event, e);
+
+        if (typeof this["on" + event] === 'function') {
+          this["on" + event](e);
+        }
+      }
+    }, {
+      key: "readyState",
+      get: function get() {
+        return this._readyState;
+      }
+    }, {
+      key: "result",
+      get: function get() {
+        return this._result;
+      }
+    }]);
+
+    return FileReader;
+  }(_EventTarget3.default);
+
+  exports.default = FileReader;
+},640,[621,638,634,632,633,624],"node_modules\\react-native-fetch-blob\\polyfill\\FileReader.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+  var _index = _require(_dependencyMap[0], "../index.js");
+
+  var _index2 = _interopRequireDefault(_index);
+
+  var _log = _require(_dependencyMap[1], "../utils/log.js");
+
+  var _log2 = _interopRequireDefault(_log);
+
+  var _fs = _require(_dependencyMap[2], "../fs");
+
+  var _fs2 = _interopRequireDefault(_fs);
+
+  var _unicode = _require(_dependencyMap[3], "../utils/unicode");
+
+  var _unicode2 = _interopRequireDefault(_unicode);
+
+  var _Blob = _require(_dependencyMap[4], "./Blob");
+
+  var _Blob2 = _interopRequireDefault(_Blob);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var log = new _log2.default('FetchPolyfill');
+  log.disable();
+
+  var Fetch = function Fetch(config) {
+    _classCallCheck(this, Fetch);
+
+    _extends(this, new RNFetchBlobFetchPolyfill(config));
+  };
+
+  exports.default = Fetch;
+
+  var RNFetchBlobFetchPolyfill = function RNFetchBlobFetchPolyfill(config) {
+    _classCallCheck(this, RNFetchBlobFetchPolyfill);
+
+    this.build = function () {
+      return function (url) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var body = options.body;
+        var promise = Promise.resolve();
+        var blobCache = null;
+        options.headers = options.headers || {};
+        var ctype = options['Content-Type'] || options['content-type'];
+        var ctypeH = options.headers['Content-Type'] || options.headers['content-type'];
+        options.headers['Content-Type'] = ctype || ctypeH;
+        options.headers['content-type'] = ctype || ctypeH;
+        options.method = options.method || 'GET';
+
+        if (body) {
+          if (body instanceof FormData) {
+            log.verbose('convert FormData to blob body');
+            promise = _Blob2.default.build(body).then(function (b) {
+              blobCache = b;
+              options.headers['Content-Type'] = 'multipart/form-data;boundary=' + b.multipartBoundary;
+              return Promise.resolve(_index2.default.wrap(b._ref));
+            });
+          } else if (body.isRNFetchBlobPolyfill) promise = Promise.resolve(_index2.default.wrap(body.blobPath));else if (typeof body !== 'object' && options.headers['Content-Type'] !== 'application/json') promise = Promise.resolve(JSON.stringify(body));else if (typeof body !== 'string') promise = Promise.resolve(body.toString());else promise = Promise.resolve(body);
+        }
+
+        var progressHandler = void 0,
+            uploadHandler = void 0,
+            cancelHandler = void 0;
+        var statefulPromise = promise.then(function (body) {
+          var task = _index2.default.config(config).fetch(options.method, url, options.headers, body);
+
+          if (progressHandler) task.progress(progressHandler);
+          if (uploadHandler) task.uploadProgress(uploadHandler);
+          if (cancelHandler) task.cancel();
+          return task.then(function (resp) {
+            log.verbose('response', resp);
+            if (blobCache !== null && blobCache instanceof _Blob2.default) blobCache.close();
+            return Promise.resolve(new RNFetchBlobFetchRepsonse(resp));
+          });
+        });
+
+        statefulPromise.progress = function (fn) {
+          progressHandler = fn;
+        };
+
+        statefulPromise.uploadProgress = function (fn) {
+          uploadHandler = fn;
+        };
+
+        statefulPromise.cancel = function () {
+          cancelHandler = true;
+          if (task.cancel) task.cancel();
+        };
+
+        return statefulPromise;
+      };
+    };
+  };
+
+  var RNFetchBlobFetchRepsonse = function () {
+    function RNFetchBlobFetchRepsonse(resp) {
+      _classCallCheck(this, RNFetchBlobFetchRepsonse);
+
+      var info = resp.info();
+      this.headers = info.headers;
+      this.ok = info.status >= 200 && info.status <= 299, this.status = info.status;
+      this.type = 'basic';
+      this.bodyUsed = false;
+      this.resp = resp;
+      this.rnfbRespInfo = info;
+      this.rnfbResp = resp;
+    }
+
+    _createClass(RNFetchBlobFetchRepsonse, [{
+      key: "rawResp",
+      value: function rawResp() {
+        return Promise.resolve(this.rnfbResp);
+      }
+    }, {
+      key: "arrayBuffer",
+      value: function arrayBuffer() {
+        log.verbose('to arrayBuffer', this.rnfbRespInfo);
+        this.bodyUsed = true;
+        return readArrayBuffer(this.rnfbResp, this.rnfbRespInfo);
+      }
+    }, {
+      key: "text",
+      value: function text() {
+        log.verbose('to text', this.rnfbResp, this.rnfbRespInfo);
+        this.bodyUsed = true;
+        return readText(this.rnfbResp, this.rnfbRespInfo);
+      }
+    }, {
+      key: "json",
+      value: function json() {
+        log.verbose('to json', this.rnfbResp, this.rnfbRespInfo);
+        this.bodyUsed = true;
+        return readJSON(this.rnfbResp, this.rnfbRespInfo);
+      }
+    }, {
+      key: "blob",
+      value: function blob() {
+        log.verbose('to blob', this.rnfbResp, this.rnfbRespInfo);
+        this.bodyUsed = true;
+        return readBlob(this.rnfbResp, this.rnfbRespInfo);
+      }
+    }]);
+
+    return RNFetchBlobFetchRepsonse;
+  }();
+
+  function readArrayBuffer(resp, info) {
+    switch (info.rnfbEncode) {
+      case 'path':
+        return resp.readFile('ascii');
+        break;
+
+      default:
+        var buffer = [];
+        var str = resp.text();
+
+        for (var i in str) {
+          buffer[i] = str.charCodeAt(i);
+        }
+
+        return Promise.resolve(buffer);
+        break;
+    }
+  }
+
+  function readText(resp, info) {
+    switch (info.rnfbEncode) {
+      case 'base64':
+        return Promise.resolve(resp.text());
+        break;
+
+      case 'path':
+        return resp.text();
+        break;
+
+      default:
+        return Promise.resolve(resp.text());
+        break;
+    }
+  }
+
+  function readBlob(resp, info) {
+    log.verbose('readBlob', resp, info);
+    return resp.blob();
+  }
+
+  function readJSON(resp, info) {
+    log.verbose('readJSON', resp, info);
+
+    switch (info.rnfbEncode) {
+      case 'base64':
+        return Promise.resolve(resp.json());
+
+      case 'path':
+        return resp.json();
+
+      default:
+        return Promise.resolve(resp.json());
+    }
+  }
+},641,[621,633,624,642,632],"node_modules\\react-native-fetch-blob\\polyfill\\Fetch.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  exports.default = function (x) {
+    var r = /\\u([\d\w]{4})/gi;
+    x = x.replace(r, function (match, grp) {
+      return String.fromCharCode(parseInt(grp, 16));
+    });
+    return unescape(x);
+  };
+},642,[],"node_modules\\react-native-fetch-blob\\utils\\unicode.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  var RNFetchBlob = _reactNative.NativeModules.RNFetchBlob;
+
+  function actionViewIntent(path) {
+    var mime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'text/plain';
+    if (_reactNative.Platform.OS === 'android') return RNFetchBlob.actionViewIntent(path, mime);else return Promise.reject('RNFetchBlob.android.actionViewIntent only supports Android.');
+  }
+
+  function getContentIntent(mime) {
+    if (_reactNative.Platform.OS === 'android') return RNFetchBlob.getContentIntent(mime);else return Promise.reject('RNFetchBlob.android.getContentIntent only supports Android.');
+  }
+
+  function addCompleteDownload(config) {
+    if (_reactNative.Platform.OS === 'android') return RNFetchBlob.addCompleteDownload(config);else return Promise.reject('RNFetchBlob.android.addCompleteDownload only supports Android.');
+  }
+
+  exports.default = {
+    actionViewIntent: actionViewIntent,
+    getContentIntent: getContentIntent,
+    addCompleteDownload: addCompleteDownload
+  };
+},643,[12],"node_modules\\react-native-fetch-blob\\android.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  var RNFetchBlob = _reactNative.NativeModules.RNFetchBlob;
+
+  function previewDocument(path, scheme) {
+    if (_reactNative.Platform.OS === 'ios') return RNFetchBlob.previewDocument('file://' + path, scheme);else return Promise.reject('RNFetchBlob.openDocument only supports IOS.');
+  }
+
+  function openDocument(path, scheme) {
+    if (_reactNative.Platform.OS === 'ios') return RNFetchBlob.openDocument('file://' + path, scheme);else return Promise.reject('RNFetchBlob.previewDocument only supports IOS.');
+  }
+
+  function excludeFromBackupKey(url) {
+    return RNFetchBlob.excludeFromBackupKey('file://' + path);
+  }
+
+  exports.default = {
+    openDocument: openDocument,
+    previewDocument: previewDocument,
+    excludeFromBackupKey: excludeFromBackupKey
+  };
+},644,[12],"node_modules\\react-native-fetch-blob\\ios.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+  var _oboeBrowserMin = _require(_dependencyMap[0], "./lib/oboe-browser.min.js");
+
+  var _oboeBrowserMin2 = _interopRequireDefault(_oboeBrowserMin);
+
+  var _XMLHttpRequest = _require(_dependencyMap[1], "./polyfill/XMLHttpRequest");
+
+  var _XMLHttpRequest2 = _interopRequireDefault(_XMLHttpRequest);
+
+  var _uri = _require(_dependencyMap[2], "./utils/uri");
+
+  var _uri2 = _interopRequireDefault(_uri);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  var OboeExtended = function OboeExtended(arg) {
+    window.location = '';
+
+    if (!window.XMLHttpRequest.isRNFBPolyfill) {
+      window.XMLHttpRequest = _XMLHttpRequest2.default;
+      console.warn('Use JSONStream will automatically replace window.XMLHttpRequest with RNFetchBlob.polyfill.XMLHttpRequest. You are seeing this warning because you did not replace it maually.');
+    }
+
+    if (typeof arg === 'string') {
+      if (_uri2.default.isFileURI(arg)) {
+        arg = {
+          url: 'JSONStream://' + arg,
+          headers: {
+            noCache: true
+          }
+        };
+      } else arg = 'JSONStream://' + arg;
+    } else if (typeof arg === 'object') {
+      var headers = arg.headers || {};
+
+      if (_uri2.default.isFileURI(arg.url)) {
+        headers.noCache = true;
+      }
+
+      arg = _extends(arg, {
+        url: 'JSONStream://' + arg.url,
+        headers: headers
+      });
+    }
+
+    return (0, _oboeBrowserMin2.default)(arg);
+  };
+
+  exports.default = OboeExtended;
+},645,[646,636,622],"node_modules\\react-native-fetch-blob\\json-stream.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  !function (a, b, c, d, e, f) {
+    function g(a, b) {
+      return function () {
+        return a.call(this, b.apply(this, arguments));
+      };
+    }
+
+    function h(a) {
+      return function (b) {
+        return b[a];
+      };
+    }
+
+    function i(a, b) {
+      return b.apply(f, a);
+    }
+
+    function j(a) {
+      var b = a.length - 1,
+          d = c.prototype.slice;
+      if (0 == b) return function () {
+        return a.call(this, d.call(arguments));
+      };
+      if (1 == b) return function () {
+        return a.call(this, arguments[0], d.call(arguments, 1));
+      };
+      var e = c(a.length);
+      return function () {
+        for (var c = 0; b > c; c++) {
+          e[c] = arguments[c];
+        }
+
+        return e[b] = d.call(arguments, b), a.apply(this, e);
+      };
+    }
+
+    function k(a) {
+      return function (b, c) {
+        return a(c, b);
+      };
+    }
+
+    function l(a, b) {
+      return function (c) {
+        return a(c) && b(c);
+      };
+    }
+
+    function m() {}
+
+    function n() {
+      return !0;
+    }
+
+    function o(a) {
+      return function () {
+        return a;
+      };
+    }
+
+    function p(a, b) {
+      return b && b.constructor === a;
+    }
+
+    function q(a) {
+      return a !== f;
+    }
+
+    function r(a, c) {
+      return c instanceof b && y(function (a) {
+        return a in c;
+      }, a);
+    }
+
+    function s(a, b) {
+      return [a, b];
+    }
+
+    function t(a) {
+      return A(a.reduce(k(s), X));
+    }
+
+    function u(a) {
+      return w(function (a, b) {
+        return a.unshift(b), a;
+      }, [], a);
+    }
+
+    function v(a, b) {
+      return b ? s(a(Y(b)), v(a, Z(b))) : X;
+    }
+
+    function w(a, b, c) {
+      return c ? a(w(a, b, Z(c)), Y(c)) : b;
+    }
+
+    function x(a, b, c) {
+      function d(a, c) {
+        return a ? b(Y(a)) ? (c(Y(a)), Z(a)) : s(Y(a), d(Z(a), c)) : X;
+      }
+
+      return d(a, c || m);
+    }
+
+    function y(a, b) {
+      return !b || a(Y(b)) && y(a, Z(b));
+    }
+
+    function z(a, b) {
+      a && (Y(a).apply(null, b), z(Z(a), b));
+    }
+
+    function A(a) {
+      function b(a, c) {
+        return a ? b(Z(a), s(Y(a), c)) : c;
+      }
+
+      return b(a, X);
+    }
+
+    function B(a, b) {
+      return b && (a(Y(b)) ? Y(b) : B(a, Z(b)));
+    }
+
+    function C(a) {
+      "use strict";
+
+      function b() {
+        var a = 0;
+        P.length > p && (c("Max buffer length exceeded: textNode"), a = Math.max(a, P.length)), Q.length > p && (c("Max buffer length exceeded: numberNode"), a = Math.max(a, Q.length)), O = p - a + Y;
+      }
+
+      function c(a) {
+        P && (m(P), n(), P = ""), i = d(a + "\nLn: " + $ + "\nCol: " + Z + "\nChr: " + j), o(N(f, f, i));
+      }
+
+      function e() {
+        return T == s ? (m({}), n(), void (S = !0)) : ((T !== t || 0 !== X) && c("Unexpected end"), P && (m(P), n(), P = ""), void (S = !0));
+      }
+
+      function g(a) {
+        return "\r" == a || "\n" == a || " " == a || "	" == a;
+      }
+
+      function h(a) {
+        if (!i) {
+          if (S) return c("Cannot write after close");
+          var d = 0;
+
+          for (j = a[0]; j && (k = j, j = a[d++]);) {
+            switch (Y++, "\n" == j ? ($++, Z = 0) : Z++, T) {
+              case s:
+                if ("{" === j) T = u;else if ("[" === j) T = w;else if (!g(j)) return c("Non-whitespace before {[.");
+                continue;
+
+              case z:
+              case u:
+                if (g(j)) continue;
+                if (T === z) U.push(A);else {
+                  if ("}" === j) {
+                    m({}), n(), T = U.pop() || t;
+                    continue;
+                  }
+
+                  U.push(v);
+                }
+                if ('"' !== j) return c('Malformed object key should start with " ');
+                T = y;
+                continue;
+
+              case A:
+              case v:
+                if (g(j)) continue;
+                if (":" === j) T === v ? (U.push(v), P && (m({}), l(P), P = ""), X++) : P && (l(P), P = ""), T = t;else if ("}" === j) P && (m(P), n(), P = ""), n(), X--, T = U.pop() || t;else {
+                  if ("," !== j) return c("Bad object");
+                  T === v && U.push(v), P && (m(P), n(), P = ""), T = z;
+                }
+                continue;
+
+              case w:
+              case t:
+                if (g(j)) continue;
+
+                if (T === w) {
+                  if (m([]), X++, T = t, "]" === j) {
+                    n(), X--, T = U.pop() || t;
+                    continue;
+                  }
+
+                  U.push(x);
+                }
+
+                if ('"' === j) T = y;else if ("{" === j) T = u;else if ("[" === j) T = w;else if ("t" === j) T = B;else if ("f" === j) T = E;else if ("n" === j) T = I;else if ("-" === j) Q += j;else if ("0" === j) Q += j, T = M;else {
+                  if (-1 === "123456789".indexOf(j)) return c("Bad value");
+                  Q += j, T = M;
+                }
+                continue;
+
+              case x:
+                if ("," === j) U.push(x), P && (m(P), n(), P = ""), T = t;else {
+                  if ("]" !== j) {
+                    if (g(j)) continue;
+                    return c("Bad array");
+                  }
+
+                  P && (m(P), n(), P = ""), n(), X--, T = U.pop() || t;
+                }
+                continue;
+
+              case y:
+                var e = d - 1;
+
+                a: for (;;) {
+                  for (; W > 0;) {
+                    if (V += j, j = a.charAt(d++), 4 === W ? (P += String.fromCharCode(parseInt(V, 16)), W = 0, e = d - 1) : W++, !j) break a;
+                  }
+
+                  if ('"' === j && !R) {
+                    T = U.pop() || t, P += a.substring(e, d - 1), P || (m(""), n());
+                    break;
+                  }
+
+                  if ("\\" === j && !R && (R = !0, P += a.substring(e, d - 1), j = a.charAt(d++), !j)) break;
+
+                  if (R) {
+                    if (R = !1, "n" === j ? P += "\n" : "r" === j ? P += "\r" : "t" === j ? P += "	" : "f" === j ? P += "\f" : "b" === j ? P += "\b" : "u" === j ? (W = 1, V = "") : P += j, j = a.charAt(d++), e = d - 1, j) continue;
+                    break;
+                  }
+
+                  q.lastIndex = d;
+                  var f = q.exec(a);
+
+                  if (!f) {
+                    d = a.length + 1, P += a.substring(e, d - 1);
+                    break;
+                  }
+
+                  if (d = f.index + 1, j = a.charAt(f.index), !j) {
+                    P += a.substring(e, d - 1);
+                    break;
+                  }
+                }
+
+                continue;
+
+              case B:
+                if (!j) continue;
+                if ("r" !== j) return c("Invalid true started with t" + j);
+                T = C;
+                continue;
+
+              case C:
+                if (!j) continue;
+                if ("u" !== j) return c("Invalid true started with tr" + j);
+                T = D;
+                continue;
+
+              case D:
+                if (!j) continue;
+                if ("e" !== j) return c("Invalid true started with tru" + j);
+                m(!0), n(), T = U.pop() || t;
+                continue;
+
+              case E:
+                if (!j) continue;
+                if ("a" !== j) return c("Invalid false started with f" + j);
+                T = F;
+                continue;
+
+              case F:
+                if (!j) continue;
+                if ("l" !== j) return c("Invalid false started with fa" + j);
+                T = G;
+                continue;
+
+              case G:
+                if (!j) continue;
+                if ("s" !== j) return c("Invalid false started with fal" + j);
+                T = H;
+                continue;
+
+              case H:
+                if (!j) continue;
+                if ("e" !== j) return c("Invalid false started with fals" + j);
+                m(!1), n(), T = U.pop() || t;
+                continue;
+
+              case I:
+                if (!j) continue;
+                if ("u" !== j) return c("Invalid null started with n" + j);
+                T = J;
+                continue;
+
+              case J:
+                if (!j) continue;
+                if ("l" !== j) return c("Invalid null started with nu" + j);
+                T = K;
+                continue;
+
+              case K:
+                if (!j) continue;
+                if ("l" !== j) return c("Invalid null started with nul" + j);
+                m(null), n(), T = U.pop() || t;
+                continue;
+
+              case L:
+                if ("." !== j) return c("Leading zero not followed by .");
+                Q += j, T = M;
+                continue;
+
+              case M:
+                if (-1 !== "0123456789".indexOf(j)) Q += j;else if ("." === j) {
+                  if (-1 !== Q.indexOf(".")) return c("Invalid number has two dots");
+                  Q += j;
+                } else if ("e" === j || "E" === j) {
+                  if (-1 !== Q.indexOf("e") || -1 !== Q.indexOf("E")) return c("Invalid number has two exponential");
+                  Q += j;
+                } else if ("+" === j || "-" === j) {
+                  if ("e" !== k && "E" !== k) return c("Invalid symbol in number");
+                  Q += j;
+                } else Q && (m(parseFloat(Q)), n(), Q = ""), d--, T = U.pop() || t;
+                continue;
+
+              default:
+                return c("Unknown state: " + T);
+            }
+          }
+
+          Y >= O && b();
+        }
+      }
+
+      var i,
+          j,
+          k,
+          l = a(qb).emit,
+          m = a(rb).emit,
+          n = a(sb).emit,
+          o = a(jb).emit,
+          p = 65536,
+          q = /[\\"\n]/g,
+          r = 0,
+          s = r++,
+          t = r++,
+          u = r++,
+          v = r++,
+          w = r++,
+          x = r++,
+          y = r++,
+          z = r++,
+          A = r++,
+          B = r++,
+          C = r++,
+          D = r++,
+          E = r++,
+          F = r++,
+          G = r++,
+          H = r++,
+          I = r++,
+          J = r++,
+          K = r++,
+          L = r++,
+          M = r,
+          O = p,
+          P = "",
+          Q = "",
+          R = !1,
+          S = !1,
+          T = s,
+          U = [],
+          V = null,
+          W = 0,
+          X = 0,
+          Y = 0,
+          Z = 0,
+          $ = 1;
+      a(nb).on(h), a(ob).on(e);
+    }
+
+    function D(a, b) {
+      "use strict";
+
+      function c(a) {
+        return function (b) {
+          d = a(d, b);
+        };
+      }
+
+      var d,
+          e = {};
+
+      for (var f in b) {
+        a(f).on(c(b[f]), e);
+      }
+
+      a(hb).on(function (a) {
+        var b,
+            c = Y(d),
+            e = ab(c),
+            f = Z(d);
+        f && (b = bb(Y(f)), b[e] = a);
+      }), a(ib).on(function () {
+        var a,
+            b = Y(d),
+            c = ab(b),
+            e = Z(d);
+        e && (a = bb(Y(e)), delete a[c]);
+      }), a(pb).on(function () {
+        for (var c in b) {
+          a(c).un(e);
+        }
+      });
+    }
+
+    function E(a) {
+      var b = {};
+      return a && a.split("\r\n").forEach(function (a) {
+        var c = a.indexOf(": ");
+        b[a.substring(0, c)] = a.substring(c + 2);
+      }), b;
+    }
+
+    function F(a, b) {
+      function c(a) {
+        return {
+          "http:": 80,
+          "https:": 443
+        }[a];
+      }
+
+      function d(b) {
+        return b.port || c(b.protocol || a.protocol);
+      }
+
+      return !!(b.protocol && b.protocol != a.protocol || b.host && b.host != a.host || b.host && d(b) != d(a));
+    }
+
+    function G(a) {
+      var b = /(\w+:)?(?:\/\/)([\w.-]+)?(?::(\d+))?\/?/,
+          c = b.exec(a) || [];
+      return {
+        protocol: c[1] || "",
+        host: c[2] || "",
+        port: c[3] || ""
+      };
+    }
+
+    function H() {
+      return new XMLHttpRequest();
+    }
+
+    function I(b, c, d, e, g, h, i) {
+      "use strict";
+
+      function j() {
+        var a = c.responseText,
+            b = a.substr(m);
+        b && k(b), m = V(a);
+      }
+
+      var k = b(nb).emit,
+          l = b(jb).emit,
+          m = 0,
+          n = !0;
+      b(pb).on(function () {
+        c.onreadystatechange = null, c.abort();
+      }), "onprogress" in c && (c.onprogress = j), c.onreadystatechange = function () {
+        function a() {
+          try {
+            n && b(mb).emit(c.status, E(c.getAllResponseHeaders())), n = !1;
+          } catch (a) {}
+        }
+
+        switch (c.readyState) {
+          case 2:
+          case 3:
+            return a();
+
+          case 4:
+            a();
+            var d = 2 == String(c.status)[0];
+            d ? (j(), b(ob).emit()) : l(N(c.status, c.responseText));
+        }
+      };
+
+      try {
+        c.open(d, e, !0);
+
+        for (var o in h) {
+          c.setRequestHeader(o, h[o]);
+        }
+
+        F(a.location, G(e)) || c.setRequestHeader("X-Requested-With", "XMLHttpRequest"), c.withCredentials = i, c.send(g);
+      } catch (p) {
+        a.setTimeout(T(l, N(f, f, p)), 0);
+      }
+    }
+
+    function J(a, b) {
+      return {
+        key: a,
+        node: b
+      };
+    }
+
+    function K(a) {
+      function b(a, b) {
+        var d = bb(Y(a));
+        return p(c, d) ? f(a, V(d), b) : a;
+      }
+
+      function d(a, c) {
+        if (!a) return j(c), f(a, cb, c);
+        var d = b(a, c),
+            g = Z(d),
+            h = ab(Y(d));
+        return e(g, h, c), s(J(h, c), g);
+      }
+
+      function e(a, b, c) {
+        bb(Y(a))[b] = c;
+      }
+
+      function f(a, b, c) {
+        a && e(a, b, c);
+        var d = s(J(b, c), a);
+        return h(d), d;
+      }
+
+      function g(a) {
+        return i(a), Z(a) || k(bb(Y(a)));
+      }
+
+      var h = a(fb).emit,
+          i = a(gb).emit,
+          j = a(lb).emit,
+          k = a(kb).emit,
+          l = {};
+      return l[rb] = d, l[sb] = g, l[qb] = f, l;
+    }
+
+    function L(a, b, c) {
+      function d(a) {
+        return function (b) {
+          return b.id == a;
+        };
+      }
+
+      var e, f;
+      return {
+        on: function on(c, d) {
+          var g = {
+            listener: c,
+            id: d || c
+          };
+          return b && b.emit(a, c, g.id), e = s(g, e), f = s(c, f), this;
+        },
+        emit: function emit() {
+          z(f, arguments);
+        },
+        un: function un(b) {
+          var g;
+          e = x(e, d(b), function (a) {
+            g = a;
+          }), g && (f = x(f, function (a) {
+            return a == g.listener;
+          }), c && c.emit(a, g.listener, g.id));
+        },
+        listeners: function listeners() {
+          return f;
+        },
+        hasListener: function hasListener(a) {
+          var b = a ? d(a) : n;
+          return q(B(b, e));
+        }
+      };
+    }
+
+    function M() {
+      function a(a) {
+        return c[a] = L(a, d, e);
+      }
+
+      function b(b) {
+        return c[b] || a(b);
+      }
+
+      var c = {},
+          d = a("newListener"),
+          e = a("removeListener");
+      return ["emit", "on", "un"].forEach(function (a) {
+        b[a] = j(function (c, d) {
+          i(d, b(c)[a]);
+        });
+      }), b;
+    }
+
+    function N(a, b, c) {
+      try {
+        var d = e.parse(b);
+      } catch (f) {}
+
+      return {
+        statusCode: a,
+        body: b,
+        jsonBody: d,
+        thrown: c
+      };
+    }
+
+    function O(a, b) {
+      function c(a, b, c) {
+        var d = A(c);
+        a(b, u(Z(v(ab, d))), u(v(bb, d)));
+      }
+
+      function d(b, d, e) {
+        var f = a(b).emit;
+        d.on(function (a) {
+          var b = e(a);
+          b !== !1 && c(f, bb(b), a);
+        }, b), a("removeListener").on(function (c) {
+          c == b && (a(c).listeners() || d.un(b));
+        });
+      }
+
+      var e = {
+        node: a(gb),
+        path: a(fb)
+      };
+      a("newListener").on(function (a) {
+        var c = /(node|path):(.*)/.exec(a);
+
+        if (c) {
+          var f = e[c[1]];
+          f.hasListener(a) || d(a, f, b(c[2]));
+        }
+      });
+    }
+
+    function P(a, b) {
+      function c(b, c) {
+        return a(b).on(e(c), c), p;
+      }
+
+      function d(a, b, c) {
+        c = c || b;
+        var d = e(b);
+        return a.on(function () {
+          var b = !1;
+          p.forget = function () {
+            b = !0;
+          }, i(arguments, d), delete p.forget, b && a.un(c);
+        }, c), p;
+      }
+
+      function e(b) {
+        return function () {
+          try {
+            return b.apply(p, arguments);
+          } catch (c) {
+            a(jb).emit(N(f, f, c));
+          }
+        };
+      }
+
+      function g(b, c) {
+        return a(b + ":" + c);
+      }
+
+      function h(a) {
+        return function () {
+          var b = a.apply(this, arguments);
+          q(b) && (b == S.drop ? t() : u(b));
+        };
+      }
+
+      function k(a, b, c) {
+        var e;
+        e = "node" == a ? h(c) : c, d(g(a, b), e, c);
+      }
+
+      function l(a, b) {
+        for (var c in b) {
+          k(a, c, b[c]);
+        }
+      }
+
+      function n(a, b, c) {
+        return W(b) ? k(a, b, c) : l(a, b), p;
+      }
+
+      var p,
+          r = /^(node|path):./,
+          s = a(kb),
+          t = a(ib).emit,
+          u = a(hb).emit,
+          v = j(function (b, c) {
+        if (p[b]) i(c, p[b]);else {
+          var e = a(b),
+              f = c[0];
+          r.test(b) ? d(e, f) : e.on(f);
+        }
+        return p;
+      }),
+          w = function w(b, c, d) {
+        if ("done" == b) s.un(c);else if ("node" == b || "path" == b) a.un(b + ":" + c, d);else {
+          var e = c;
+          a(b).un(e);
+        }
+        return p;
+      };
+
+      return a(lb).on(function (a) {
+        p.root = o(a);
+      }), a(mb).on(function (a, b) {
+        p.header = function (a) {
+          return a ? b[a] : b;
+        };
+      }), p = {
+        on: v,
+        addListener: v,
+        removeListener: w,
+        emit: a.emit,
+        node: T(n, "node"),
+        path: T(n, "path"),
+        done: T(d, s),
+        start: T(c, mb),
+        fail: a(jb).on,
+        abort: a(pb).emit,
+        header: m,
+        root: m,
+        source: b
+      };
+    }
+
+    function Q(a, b, c, d, e) {
+      var f = M();
+      return b && I(f, H(), a, b, c, d, e), C(f), D(f, K(f)), O(f, db), P(f, b);
+    }
+
+    function R(a, b, c, d, f, g, h) {
+      function i(a, b) {
+        return b === !1 && (a += -1 == a.indexOf("?") ? "?" : "&", a += "_=" + new Date().getTime()), a;
+      }
+
+      return f = f ? e.parse(e.stringify(f)) : {}, d ? W(d) || (d = e.stringify(d), f["Content-Type"] = f["Content-Type"] || "application/json") : d = null, a(c || "GET", i(b, h), d, f, g || !1);
+    }
+
+    function S(a) {
+      var b = $("resume", "pause", "pipe"),
+          c = T(r, b);
+      return a ? c(a) || W(a) ? R(Q, a) : R(Q, a.url, a.method, a.body, a.headers, a.withCredentials, a.cached) : Q();
+    }
+
+    var T = j(function (a, b) {
+      var c = b.length;
+      return j(function (d) {
+        for (var e = 0; e < d.length; e++) {
+          b[c + e] = d[e];
+        }
+
+        return b.length = c + d.length, a.apply(this, b);
+      });
+    }),
+        U = (j(function (a) {
+      function b(a, b) {
+        return [i(a, b)];
+      }
+
+      var c = t(a);
+      return j(function (a) {
+        return w(b, a, c)[0];
+      });
+    }), j(function (a) {
+      return j(function (b) {
+        for (var c, d = 0; d < V(a); d++) {
+          if (c = i(b, a[d])) return c;
+        }
+      });
+    })),
+        V = h("length"),
+        W = T(p, String),
+        X = null,
+        Y = h(0),
+        Z = h(1),
+        $ = j(t),
+        _ = function () {
+      var a = function a(_a) {
+        return _a.exec.bind(_a);
+      },
+          b = j(function (b) {
+        return b.unshift(/^/), a(RegExp(b.map(h("source")).join("")));
+      }),
+          c = /(\$?)/,
+          d = /([\w-_]+|\*)/,
+          e = /()/,
+          f = /\["([^"]+)"\]/,
+          g = /\[(\d+|\*)\]/,
+          i = /{([\w ]*?)}/,
+          k = /(?:{([\w ]*?)})?/,
+          l = b(c, d, k),
+          m = b(c, f, k),
+          n = b(c, g, k),
+          o = b(c, e, i),
+          p = b(/\.\./),
+          q = b(/\./),
+          r = b(c, /!/),
+          s = b(/$/);
+
+      return function (a) {
+        return a(U(l, m, n, o), p, q, r, s);
+      };
+    }(),
+        ab = h("key"),
+        bb = h("node"),
+        cb = {},
+        db = _(function (a, b, c, e, f) {
+      function h(a, b) {
+        var c = b[z],
+            d = c && "*" != c ? function (a) {
+          return B(a) == c;
+        } : n;
+        return l(d, a);
+      }
+
+      function i(a, b) {
+        var c = b[A];
+        if (!c) return a;
+        var d = T(r, t(c.split(/\W+/))),
+            e = g(d, C);
+        return l(e, a);
+      }
+
+      function j(a, b) {
+        var c = !!b[y];
+        return c ? l(a, Y) : a;
+      }
+
+      function k(a) {
+        function b(a) {
+          return B(a) != cb;
+        }
+
+        return a == n ? n : l(b, g(a, Z));
+      }
+
+      function m(a) {
+        if (a == n) return n;
+        var b = o(),
+            c = a,
+            d = k(function (a) {
+          return e(a);
+        }),
+            e = U(b, c, d);
+        return e;
+      }
+
+      function o() {
+        return function (a) {
+          return B(a) == cb;
+        };
+      }
+
+      function p(a) {
+        return function (b) {
+          var c = a(b);
+          return c === !0 ? Y(b) : c;
+        };
+      }
+
+      function q(a, b, c) {
+        return w(function (a, b) {
+          return b(a, c);
+        }, b, a);
+      }
+
+      function s(a, b, c, d, e) {
+        var f = a(c);
+
+        if (f) {
+          var g = q(b, d, f),
+              h = c.substr(V(f[0]));
+          return e(h, g);
+        }
+      }
+
+      function u(a, b) {
+        return T(s, a, b);
+      }
+
+      function v(a, b) {
+        return b;
+      }
+
+      function x(a, b) {
+        var c = a ? x : v;
+        return D(a, b, c);
+      }
+
+      var y = 1,
+          z = 2,
+          A = 3,
+          B = g(ab, Y),
+          C = g(bb, Y),
+          D = U(u(a, $(j, i, h, k)), u(b, $(m)), u(c, $()), u(e, $(j, o)), u(f, $(p)), function (a) {
+        throw d('"' + a + '" could not be tokenised');
+      });
+      return function (a) {
+        try {
+          return x(a, n);
+        } catch (b) {
+          throw d('Could not compile "' + a + '" because ' + b.message);
+        }
+      };
+    }),
+        eb = 1,
+        fb = eb++,
+        gb = eb++,
+        hb = eb++,
+        ib = eb++,
+        jb = "fail",
+        kb = eb++,
+        lb = eb++,
+        mb = "start",
+        nb = "data",
+        ob = "end",
+        pb = eb++,
+        qb = eb++,
+        rb = eb++,
+        sb = eb++;
+
+    S.drop = function () {
+      return S.drop;
+    }, "function" == typeof define && define.amd ? define("oboe", [], function () {
+      return S;
+    }) : "object" == typeof exports ? module.exports = S : a.oboe = S;
+  }(function () {
+    try {
+      return window;
+    } catch (a) {
+      return self;
+    }
+  }(), Object, Array, Error, JSON);
+},646,[],"node_modules\\react-native-fetch-blob\\lib\\oboe-browser.min.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  var RNImageColorPicker = _reactNative.NativeModules.RNImageColorPicker;
+  exports.default = RNImageColorPicker;
+},647,[12],"node_modules\\image-color-picker\\index.js");
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var canvasHtml = exports.canvasHtml = function canvasHtml(imageBlob, options) {
+    var optionsString = JSON.stringify(options);
+    return "\n      <!DOCTYPE html>\n      <html>\n      <script>\n      function getColorPalettes(options) {\n        const {\n          imageType = 'jpeg',\n          paletteCount = 3,\n          defaultPalette = [0, 0, 0, 1],\n          paletteType = 'dominant',\n          colorType = 'rgba'\n        } = options;\n  \n        const imageElement = document.getElementById('__colorPickerCanvasImage');      \n        const canvas = document.createElement('canvas');\n        const\tcanvasContext = canvas.getContext && canvas.getContext('2d');\n  \n        if (!canvasContext) return defaultPalette;\n        \n        let imageWidth = canvas.width = imageElement.naturalWidth \n          || imageElement.offsetWidth \n          || imageElement.width;                \n  \n        const imageHeight = canvas.height = imageElement.naturalHeight \n          || imageElement.offsetHeight \n          || imageElement.height;                   \n  \n        canvasContext.drawImage(imageElement, 0, 0);\n        \n        let palette = [];\n        if (paletteType === 'average')\n          palette = getAveragePalette({imageWidth, imageHeight, canvasContext, colorType});\n        else\n          palette = getDominantPalettes(getAllPalettes(imageWidth, imageHeight, canvasContext), paletteCount, colorType);\n  \n        window.postMessage(JSON.stringify({'message':'imageColorPicker','payload':palette}));        \n      }\n  \n      function getAveragePalette({imageWidth, imageHeight, canvasContext, colorType = 'rgb'}) {\n        const blockSize = 5\n        let i = -4;\n        let count = 0;\n        let red = green = blue = 0, alpha = 1;      \n        \n        try {\n          data = canvasContext.getImageData(0, 0, imageWidth, imageHeight);\n        } catch(e) {\n          console.log(e);\n        }\n      \n        while ((i += blockSize * 4) < data.data.length) {\n          ++count;\n          red += data.data[i];\n          green += data.data[i+1];\n          blue += data.data[i+2];\n        }\n  \n        red = ~~(red/count);\n        green = ~~(green/count);\n        blue = ~~(blue/count);\n        if (colorType === 'hex')\n          return [[rgbToHex([red, green, blue])]]\n        else\n          return [[red, green, blue, alpha]];\n      }\n  \n      function rgbToHex(rgba) {\n        let hexColor = '#';\n        rgba.slice(0, 3).forEach(c => {\n          let hex = c.toString(16);\n          hexColor += hex.length == 1 ? '0' + hex : hex;  \n        });\n        return hexColor\n      }\n  \n      function getAllPalettes(width, height, context) {\n        let distinctPalettes = [];        \n        for (let i=0; i<=height; i++) { \n          for (let j=0; j<=width; j++) { \n            try {\n              data = context.getImageData(i, j, 1, 1);\n              if (data.data.toString().trim() !== '0,0,0,0') {\n                distinctPalettes.push(data.data);\n              }\n            } catch(e) {\n              console.log(e);\n            }\n          }\n        }  \n        return distinctPalettes;\n      }\n  \n      function getDominantPalettes(allPalettes, distinctCount, colorType = 'rgb') {\n        const combinations = getPaletteOccurrences(allPalettes);\n        let palettes = combinations[0];\n        let occurrences = combinations[1];\n        const dominantPalettes = [];\n  \n        while (distinctCount) {               \n          let dominant = 0, dominantKey = 0;  \n          occurrences.forEach((v, k) => {           \n            if (v > dominant) {\n              dominant = v;              \n              dominantKey = k;                               \n            }\n          });\n          if (colorType === 'hex')\n            dominantPalettes.push(rgbToHex(palettes[dominantKey]));\n          else\n            dominantPalettes.push(palettes[dominantKey]);\n            \n          palettes.splice(dominantKey, 1);            \n          occurrences.splice(dominantKey, 1);\n          distinctCount--;\n        }\n        return dominantPalettes;\n      }        \n  \n      function getPaletteOccurrences(palettes) {\n        let paletteList = [], occurrenceList = [], previousPalette;\n        palettes.sort();\n        palettes.forEach((palette, key) => {\n          if (palette.toString() !== previousPalette) {\n            paletteList.push(palette);\n            occurrenceList.push(1);\n          } else {\n            occurrenceList[occurrenceList.length-1]++;\n          }\n          previousPalette = palettes[key].toString();\n        });\n        return [paletteList, occurrenceList];\n      }\n  \n      const interval = setInterval(() => {\n        const img = document.getElementById('__colorPickerCanvasImage');\n        if (img.src.length != 0) {\n          getColorPalettes(" + optionsString + ");\n          clearInterval(interval);\n        }\n      }, 10);        \n  \n      </script>\n      <body>\n        <img src='data:image/" + options.imageType + ";base64," + imageBlob + "' \n          width='" + options.imageWidth + "px'\n          height='" + options.imageHeight + "px'\n          id='__colorPickerCanvasImage' \n          onload='getColorPalettes(" + optionsString + ")'/>\n      </body>\n      </html>\n    ";
+  };
+},648,[],"node_modules\\react-native-image-color-picker\\src\\canvas-html.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -109625,7 +113821,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, {
 		songAction: _actions.songAction
 	})((0, _reactNavigation.withNavigation)(Song));
-},619,[118,179,12,510,539,620,616],"src\\components\\Song\\Song.js");
+},649,[118,179,12,510,539,650,616],"src\\components\\Song\\Song.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -109654,7 +113850,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       }
     });
   });
-},620,[621,626],"src\\actions\\index.js");
+},650,[651,655],"src\\actions\\index.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -109760,7 +113956,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
 		return false;
 	};
-},621,[496,622,623,535],"src\\actions\\LibraryActions.js");
+},651,[496,652,653,535],"src\\actions\\LibraryActions.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -109775,7 +113971,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     }
   };
   exports.default = MusicMetadataWrapper;
-},622,[12],"node_modules\\react-native-music-metadata\\track.js");
+},652,[12],"node_modules\\react-native-music-metadata\\track.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   'use strict';
 
@@ -110217,125 +114413,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     PicturesDirectoryPath: RNFSManager.RNFSPicturesDirectoryPath
   };
   module.exports = RNFS;
-},623,[12,624,625],"node_modules\\react-native-fs\\FS.common.js");
-__d(function (global, _require, module, exports, _dependencyMap) {
-	;
-
-	(function (root) {
-		var freeExports = typeof exports == 'object' && exports;
-		var freeModule = typeof module == 'object' && module && module.exports == freeExports && module;
-		var freeGlobal = typeof global == 'object' && global;
-
-		if (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal) {
-			root = freeGlobal;
-		}
-
-		var InvalidCharacterError = function InvalidCharacterError(message) {
-			this.message = message;
-		};
-
-		InvalidCharacterError.prototype = new Error();
-		InvalidCharacterError.prototype.name = 'InvalidCharacterError';
-
-		var error = function error(message) {
-			throw new InvalidCharacterError(message);
-		};
-
-		var TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-		var REGEX_SPACE_CHARACTERS = /[\t\n\f\r ]/g;
-
-		var decode = function decode(input) {
-			input = String(input).replace(REGEX_SPACE_CHARACTERS, '');
-			var length = input.length;
-
-			if (length % 4 == 0) {
-				input = input.replace(/==?$/, '');
-				length = input.length;
-			}
-
-			if (length % 4 == 1 || /[^+a-zA-Z0-9/]/.test(input)) {
-				error('Invalid character: the string to be decoded is not correctly encoded.');
-			}
-
-			var bitCounter = 0;
-			var bitStorage;
-			var buffer;
-			var output = '';
-			var position = -1;
-
-			while (++position < length) {
-				buffer = TABLE.indexOf(input.charAt(position));
-				bitStorage = bitCounter % 4 ? bitStorage * 64 + buffer : buffer;
-
-				if (bitCounter++ % 4) {
-					output += String.fromCharCode(0xFF & bitStorage >> (-2 * bitCounter & 6));
-				}
-			}
-
-			return output;
-		};
-
-		var encode = function encode(input) {
-			input = String(input);
-
-			if (/[^\0-\xFF]/.test(input)) {
-				error('The string to be encoded contains characters outside of the ' + 'Latin1 range.');
-			}
-
-			var padding = input.length % 3;
-			var output = '';
-			var position = -1;
-			var a;
-			var b;
-			var c;
-			var d;
-			var buffer;
-			var length = input.length - padding;
-
-			while (++position < length) {
-				a = input.charCodeAt(position) << 16;
-				b = input.charCodeAt(++position) << 8;
-				c = input.charCodeAt(++position);
-				buffer = a + b + c;
-				output += TABLE.charAt(buffer >> 18 & 0x3F) + TABLE.charAt(buffer >> 12 & 0x3F) + TABLE.charAt(buffer >> 6 & 0x3F) + TABLE.charAt(buffer & 0x3F);
-			}
-
-			if (padding == 2) {
-				a = input.charCodeAt(position) << 8;
-				b = input.charCodeAt(++position);
-				buffer = a + b;
-				output += TABLE.charAt(buffer >> 10) + TABLE.charAt(buffer >> 4 & 0x3F) + TABLE.charAt(buffer << 2 & 0x3F) + '=';
-			} else if (padding == 1) {
-				buffer = input.charCodeAt(position);
-				output += TABLE.charAt(buffer >> 2) + TABLE.charAt(buffer << 4 & 0x3F) + '==';
-			}
-
-			return output;
-		};
-
-		var base64 = {
-			'encode': encode,
-			'decode': decode,
-			'version': '0.1.0'
-		};
-
-		if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
-			define(function () {
-				return base64;
-			});
-		} else if (freeExports && !freeExports.nodeType) {
-			if (freeModule) {
-				freeModule.exports = base64;
-			} else {
-				for (var key in base64) {
-					base64.hasOwnProperty(key) && (freeExports[key] = base64[key]);
-				}
-			}
-		} else {
-			root.base64 = base64;
-		}
-	})(this);
-},624,[],"node_modules\\base-64\\base64.js");
+},653,[12,630,654],"node_modules\\react-native-fs\\FS.common.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	;
 
@@ -110564,7 +114642,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 			root.utf8 = utf8;
 		}
 	})(this);
-},625,[],"node_modules\\utf8\\utf8.js");
+},654,[],"node_modules\\utf8\\utf8.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -110689,7 +114767,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 		};
 		return track;
 	};
-},626,[491,535],"src\\actions\\NowPlayingActions.js");
+},655,[491,535],"src\\actions\\NowPlayingActions.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -110878,7 +114956,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, {
 		buildLibrary: _actions.buildLibrary
 	})(Tabs);
-},627,[118,179,12,510,539,537,628,620,616],"src\\routers\\Tabs.js");
+},656,[118,179,12,510,539,537,657,650,616],"src\\routers\\Tabs.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -111022,7 +115100,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 		}
 	};
 	exports.default = ArtistList;
-},628,[118,179,12,537,629,616],"src\\components\\Artist\\ArtistList.js");
+},657,[118,179,12,537,658,616],"src\\components\\Artist\\ArtistList.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -111113,7 +115191,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 	}(_react2.Component));
 
 	exports.default = Artist;
-},629,[118,179,630],"src\\components\\Artist\\Artist.js");
+},658,[118,179,659],"src\\components\\Artist\\Artist.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -111350,7 +115428,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 		}
 	};
 	exports.default = ArtistCard;
-},630,[118,179,12,537,616],"src\\components\\Artist\\ArtistCard.js");
+},659,[118,179,12,537,616],"src\\components\\Artist\\ArtistCard.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -111448,9 +115526,9 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
 				if (isPlaying || isPaused) {
 					return _react3.default.createElement(
-						_reactNativeSwipeGestures2.default,
+						_reactNative.View,
 						{
-							onSwipeLeft: this.props.skipTrack,
+							style: styles.barContainerStyle,
 							__source: {
 								fileName: _jsxFileName,
 								lineNumber: 30
@@ -111459,37 +115537,35 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 						_react3.default.createElement(
 							_reactNative.View,
 							{
-								style: styles.barContainerStyle,
+								style: styles.progressBarContainerStyle,
 								__source: {
 									fileName: _jsxFileName,
 									lineNumber: 31
+								}
+							},
+							_react3.default.createElement(_ProgressBar2.default, {
+								__source: {
+									fileName: _jsxFileName,
+									lineNumber: 32
+								}
+							})
+						),
+						_react3.default.createElement(
+							_reactNativeSwipeGestures2.default,
+							{
+								onSwipeLeft: this.props.skipTrack,
+								__source: {
+									fileName: _jsxFileName,
+									lineNumber: 34
 								}
 							},
 							_react3.default.createElement(
 								_reactNative.View,
 								{
 									style: {
-										flex: 1,
-										height: 5,
-										marginBottom: 5
-									},
-									__source: {
-										fileName: _jsxFileName,
-										lineNumber: 32
-									}
-								},
-								_react3.default.createElement(_ProgressBar2.default, {
-									__source: {
-										fileName: _jsxFileName,
-										lineNumber: 33
-									}
-								})
-							),
-							_react3.default.createElement(
-								_reactNative.View,
-								{
-									style: {
-										flexDirection: 'row'
+										flexDirection: 'row',
+										borderTopWidth: 1,
+										borderColor: '#404040'
 									},
 									__source: {
 										fileName: _jsxFileName,
@@ -111614,20 +115690,18 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 	}(_react2.Component));
 
 	var styles = {
+		progressBarContainerStyle: {
+			flex: 1,
+			height: 5,
+			marginBottom: 5
+		},
 		barContainerStyle: {
 			width: '100%',
 			backgroundColor: _PurpleTeal.PRIMARY,
 			height: 80,
 			position: 'absolute',
 			bottom: 0,
-			flex: 1,
-			shadowColor: '#000',
-			shadowOffset: {
-				width: 0,
-				height: 2
-			},
-			shadowOpacity: 1,
-			elevation: 10
+			flex: 1
 		},
 		albumCoverStyle: {
 			width: 75,
@@ -111700,7 +115774,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 		playPauseAction: _NowPlayingActions.playPauseAction,
 		skipTrack: _actions.skipTrack
 	})(NowPlayingBar);
-},631,[118,179,12,510,632,626,617,633,634,620,616,635],"src\\components\\NowPlaying\\NowPlayingBar.js");
+},660,[118,179,12,510,661,655,617,662,663,650,616,664],"src\\components\\NowPlaying\\NowPlayingBar.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   'use strict';
 
@@ -111903,31 +115977,31 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
   ;
   exports.default = GestureRecognizer;
-},632,[118,179,12],"node_modules\\react-native-swipe-gestures\\index.js");
+},661,[118,179,12],"node_modules\\react-native-swipe-gestures\\index.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   module.exports = _require(_dependencyMap[0], "react-native/Libraries/Image/AssetRegistry").registerAsset({
     "__packager_asset": true,
     "httpServerLocation": "/assets/src/images",
-    "width": 54,
-    "height": 54,
+    "width": 192,
+    "height": 192,
     "scales": [1],
-    "hash": "8b632c90e19ec4069afb43cf03efb235",
+    "hash": "37bc21505f2e236e54e022f19e6cff1f",
     "name": "play_white",
     "type": "png"
   });
-},633,[164],"src\\images\\play_white.png");
+},662,[164],"src\\images\\play_white.png");
 __d(function (global, _require, module, exports, _dependencyMap) {
   module.exports = _require(_dependencyMap[0], "react-native/Libraries/Image/AssetRegistry").registerAsset({
     "__packager_asset": true,
     "httpServerLocation": "/assets/src/images",
-    "width": 54,
-    "height": 54,
+    "width": 192,
+    "height": 192,
     "scales": [1],
-    "hash": "006efb50f92ab993805ddd18f46dcba7",
+    "hash": "0e0d2d6628122c38f2df8ba10f7676d5",
     "name": "pause_white",
     "type": "png"
   });
-},634,[164],"src\\images\\pause_white.png");
+},663,[164],"src\\images\\pause_white.png");
 __d(function (global, _require, module, exports, _dependencyMap) {
     Object.defineProperty(exports, "__esModule", {
         value: true
@@ -112035,7 +116109,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     });
 
     exports.default = ProgressBar;
-},635,[118,12,491,616],"src\\components\\NowPlaying\\ProgressBar.js");
+},664,[118,12,491,616],"src\\components\\NowPlaying\\ProgressBar.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   var _this = this;
 
@@ -112050,7 +116124,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       }
     }, null, _this);
   };
-},636,[],"player-handler.js");
+},665,[],"player-handler.js");
 require(44);
 require(11);
 //# sourceMappingURL=index.map
