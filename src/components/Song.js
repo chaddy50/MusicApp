@@ -4,7 +4,7 @@ import { Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { songAction } from '../actions';
-import { PRIMARY, DIVIDER } from '../themes/PurpleTeal/PurpleTeal';
+import { DIVIDER, SECONDARY_DARK } from '../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region Song
@@ -16,7 +16,7 @@ class Song extends Component {
 		return (
 			<TouchableHighlight
 				style={touchableStyle}
-				underlayColor={PRIMARY}
+				underlayColor={SECONDARY_DARK}
 				onPress={() => this.props.songAction(songList, songIndex)}
 			>
 				<View style={containerStyle}>
