@@ -57,7 +57,8 @@ const styles = {
 	},
 	albumCoverStyle: {
 		width: 150,
-		height: 150
+		height: 150,
+		borderRadius: 15
 	},
 	albumTitleStyle: {
 		color: 'black',

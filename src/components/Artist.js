@@ -1,6 +1,6 @@
 //#region Imports
 import React, { Component } from 'react';
-import { TouchableCard } from './common';
+import ArtistCard from './ArtistCard';
 //#endregion
 
 //#region Artist
@@ -9,7 +9,7 @@ class Artist extends Component {
 		const { artist } = this.props;
 
 		return (
-			<TouchableCard 
+			<ArtistCard 
 				label={artist.name} 
 				onPress={this.onPress.bind(this)} 
 			/>
