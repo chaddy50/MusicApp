@@ -1,25 +1,38 @@
-import { DrawerNavigator } from 'react-navigation';
-import TabStack from './RootStack';
-import { PRIMARY, SECONDARY, ON_PRIMARY, BACKGROUND } from '../themes/PurpleTeal/PurpleTeal';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { DrawerNavigator, withNavigation } from 'react-navigation';
+import RootStack from './RootStack';
+import DrawerItem from './DrawerItem';
+import ThemeSettings from '../components/Settings/ThemeSettings';
 
-const Drawer = DrawerNavigator(
+class Drawer extends Component {
+	render() {
+		return <DrawerNav />;
+	}
+}
+
+export const DrawerNav = DrawerNavigator(
 	{
 		Home: {
-			screen: TabStack
+			screen: RootStack
+		},
+		ThemeSettings: {
+			screen: ThemeSettings,
+			navigationOptions: {
+				title: 'Theme'
+			}
 		}
 	},
 	{
 		initialRouteName: 'Home',
-		contentOptions: {
-			activeBackgroundColor: PRIMARY,
-			inactiveBackgroundColor: SECONDARY,
-			activeTintColor: ON_PRIMARY,
-			itemsContainerStyle: {
-				backgroundColor: BACKGROUND,
-				flex: 1
-			}
-		}
+		contentComponent: DrawerItem
 	}
 );
 
-export default Drawer;
+const mapStateToProps = (state, props) => {
+	const theme = state.themeState.theme;
+
+	return { ...props, theme };
+};
+
+export default connect(mapStateToProps)(withNavigation(Drawer));

@@ -1,16 +1,17 @@
 //#region Imports
 import React, { Component } from 'react';
 import { ListView, View } from 'react-native';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 import Artist from './Artist';
-import { BACKGROUND } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region ArtistList
 class ArtistList extends Component {
 	render() {
+		const background = this.props.theme.BACKGROUND;
 		return (
-			<View style={styles.containerStyle}>
+			<View style={[{ backgroundColor: background }, styles.containerStyle]}>
 				<ListView
 					enableEmptySections
 					dataSource={this.dataSource}
@@ -58,10 +59,14 @@ class ArtistList extends Component {
 //#region Styles
 const styles = {
 	containerStyle: {
-		backgroundColor: BACKGROUND,
 		flex: 1
 	}
 };
 //#endregion
 
-export default ArtistList;
+const mapStateToProps = (state) => {
+	const { theme } = state.themeState;
+
+	return { theme };
+}
+export default connect(mapStateToProps)(ArtistList);

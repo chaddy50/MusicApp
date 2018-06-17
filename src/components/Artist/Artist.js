@@ -1,5 +1,6 @@
 //#region Imports
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ArtistCard from './ArtistCard';
 //#endregion
 
@@ -18,17 +19,24 @@ class Artist extends Component {
 	}
 	
 	onPress() {
-		const { albumList, artist } = this.props;
+		const { albumList, artist, theme } = this.props;
 
 		this.props.rootNavigation.navigate(
 			'AlbumList', 
 			{ 
 				title: artist.name, 
-				albumList 
+				albumList,
+				theme 
 			}
 		);
 	}
 }
 //#endregion
 
-export default Artist;
+const mapStateToProps = (state, props) => {
+	const { theme } = state.themeState;
+
+	return { ...props, theme };
+};
+
+export default connect(mapStateToProps)(Artist);

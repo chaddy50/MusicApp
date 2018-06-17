@@ -5,25 +5,25 @@ import { TabNavigator } from 'react-navigation';
 import _ from 'lodash';
 import ArtistList from '../components/Artist/ArtistList';
 import { buildLibrary } from '../actions';
-import { PRIMARY, PRIMARY_DARK, SECONDARY, ON_PRIMARY, ON_PRIMARY_NO_FOCUS } from '../themes/PurpleTeal/PurpleTeal';
 
-class Tabs extends Component {
+class GenreTabs extends Component {
 	componentWillMount() {
 		this.props.buildLibrary(this.props.navigation);
 	}
 
 	buildTabs() {
+		const { theme } = this.props;
 		const tabConfig = {
 			tabBarOptions: {
-				pressColor: SECONDARY,
+				pressColor: theme.SECONDARY,
 				style: {
-					backgroundColor: PRIMARY
+					backgroundColor: theme.PRIMARY
 				},
 				indicatorStyle: {
-					backgroundColor: SECONDARY
+					backgroundColor: theme.SECONDARY
 				},
-				activeTintColor: ON_PRIMARY,
-				inactiveTintColor: ON_PRIMARY_NO_FOCUS,
+				activeTintColor: theme.ON_PRIMARY,
+				inactiveTintColor: theme.ON_PRIMARY_NOFOCUS,
 				scrollEnabled: true,
 				tabStyle: {
 					width: 115
@@ -54,9 +54,10 @@ class Tabs extends Component {
 	}
 
 	render() {
+		const { theme } = this.props;
 		return (
 			<View style={{ flex: 1 }}>
-				<StatusBar backgroundColor={PRIMARY_DARK} />
+				<StatusBar backgroundColor={theme.PRIMARY_DARK} />
 				{this.buildTabs()}
 			</View>
 		);
@@ -65,8 +66,9 @@ class Tabs extends Component {
 
 const mapStateToProps = (state) => {
 	const { library } = state.libraryState;
+	const { theme } = state.themeState;
 
-	return { library };
+	return { library, theme };
 };
 
-export default connect(mapStateToProps, { buildLibrary })(Tabs);
+export default connect(mapStateToProps, { buildLibrary })(GenreTabs);

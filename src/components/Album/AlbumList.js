@@ -6,15 +6,14 @@ import { withNavigation } from 'react-navigation';
 import _ from 'lodash';
 import AlbumCard from './AlbumCard';
 import defaultAlbumCover from '../../images/defaultAlbum.png';
-import { PRIMARY, BACKGROUND } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region AlbumList
 class AlbumList extends Component {
-
 	render() {
+		const { BACKGROUND } = this.props.theme;
 		return (
-			<ScrollView style={styles.containerStyle}>
+			<ScrollView style={[{ backgroundColor: BACKGROUND }, styles.containerStyle]}>
 				<ListView
 					enableEmptySections
 					dataSource={this.dataSource}
@@ -26,11 +25,12 @@ class AlbumList extends Component {
 
 	renderRow(album) {
 		const { songList, year, name, coverPath } = this.getAlbumInfo(album);
+		const { theme } = this.props;
 
 		return (
 			<TouchableHighlight 
 				style={styles.touchableStyle}
-				underlayColor={PRIMARY}
+				underlayColor={theme.SECONDARY}
 				onPress={() => 
 					this.props.navigation.navigate(
 						'Album', 
@@ -38,7 +38,8 @@ class AlbumList extends Component {
 							songList, 
 							name, 
 							year,
-							coverPath 
+							coverPath,
+							theme 
 						}
 					)
 				}
@@ -73,6 +74,9 @@ class AlbumList extends Component {
 
 	componentWillMount() {
 		this.createDataSource(this.props);
+		
+		const { theme } = this.props;
+		this.props.navigation.setParams({ theme });
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -93,7 +97,6 @@ class AlbumList extends Component {
 //#region Styles
 const styles = {
 	containerStyle: {
-		backgroundColor: BACKGROUND,
 		flex: 1
 	}
 };
@@ -101,6 +104,7 @@ const styles = {
 
 //#region MapStateToProps
 const mapStateToProps = (state, props) => {
+	const { theme } = state.themeState;
 	if (typeof (props.navigation) !== 'undefined') {
 		// Sort album list by year
 		const albumList = props.navigation.state.params.albumList.sort((a, b) => { 
@@ -108,9 +112,9 @@ const mapStateToProps = (state, props) => {
 		});
 
 		// Make sure we've got our navigation parameters on this.props
-		return { ...props, albumList, ...props.navigation.state.params };
+		return { ...props, albumList, ...props.navigation.state.params, theme };
 	}
-	return { ...props };
+	return { ...props, theme };
 };
 //#endregion
 

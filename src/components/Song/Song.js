@@ -1,10 +1,9 @@
 //#region Imports
 import React, { Component } from 'react';
-import { Text, TouchableHighlight, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { songAction } from '../../actions';
-import { DIVIDER, SECONDARY_DARK } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region Song
@@ -12,18 +11,18 @@ class Song extends Component {
 	render() {
 		const { song, songList, songIndex } = this.props;
 		const { touchableStyle, containerStyle, trackNumStyle, titleStyle } = styles;
+		const { BACKGROUND, SEPARATOR, ON_BACKGROUND } = this.props.theme;
 
 		return (
-			<TouchableHighlight
-				style={touchableStyle}
-				underlayColor={SECONDARY_DARK}
+			<TouchableOpacity
+				style={[{ backgroundColor: BACKGROUND, borderColor: SEPARATOR }, touchableStyle]}
 				onPress={() => this.props.songAction(songList, songIndex)}
 			>
 				<View style={containerStyle}>
-					<Text style={trackNumStyle}>{`${song.trackNum}.`}</Text>
-					<Text numberOfLines={1} style={titleStyle}>{song.title}</Text>
+					<Text style={[{ color: ON_BACKGROUND }, trackNumStyle]}>{`${song.trackNum}.`}</Text>
+					<Text numberOfLines={1} style={[{ color: ON_BACKGROUND }, titleStyle]}>{song.title}</Text>
 				</View>
-			</TouchableHighlight>
+			</TouchableOpacity>
 		);
 	}
 }
@@ -33,7 +32,6 @@ class Song extends Component {
 const styles = {
 	touchableStyle: {
 		borderBottomWidth: 1,
-		borderColor: DIVIDER,
 		height: 40
 	},
 	containerStyle: {
@@ -43,13 +41,11 @@ const styles = {
 		padding: 10
 	},
 	trackNumStyle: {
-		color: 'black',
 		textAlign: 'right',
 		paddingRight: 10,
 		width: 30
 	},
 	titleStyle: {
-		color: 'black',
 		paddingRight: 10,
 		flex: 1
 	}
@@ -58,11 +54,13 @@ const styles = {
 
 //#region MapStateToProps
 const mapStateToProps = (state, props) => {
+	const { theme } = state.themeState;
+
 	if (typeof (props.navigation) !== 'undefined') {
 		// Make sure we've got our navigation parameters on this.props
-		return { ...props.navigation.state.params };
+		return { ...props.navigation.state.params, theme };
 	}
-	return {};
+	return { theme };
 };
 //#endregion
 

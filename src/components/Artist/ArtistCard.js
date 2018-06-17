@@ -1,14 +1,15 @@
 //#region Imports
 import React, { Component } from 'react';
-import { TouchableHighlight, Text, View } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 import _ from 'lodash';
-import { DIVIDER, SECONDARY_DARK, ON_BACKGROUND, ON_BACKGROUND_SECONDARY } from '../../themes/PurpleTeal/PurpleTeal';
 //#endregion
 
 //#region ArtistCard
 class ArtistCard extends Component {
 	render() {
 		const { onPress, albumList, label } = this.props;
+		const { SECONDARY, SEPARATOR, ON_BACKGROUND, ON_BACKGROUND_NOFOCUS } = this.props.theme;
 
 		const numAlbums = albumList.length;
 		const albumLabel = this.getAlbumLabel(numAlbums);
@@ -17,18 +18,21 @@ class ArtistCard extends Component {
 		const songLabel = this.getSongLabel(numSongs);
 
 		return (
-			<TouchableHighlight style={styles.cardStyle}underlayColor={SECONDARY_DARK} onPress={onPress}>
+			<TouchableOpacity 
+				style={[{ borderColor: SEPARATOR }, styles.cardStyle]} 
+				onPress={onPress}
+			>
 				<View style={{ flex: 1 }}>
 					<View style={styles.artistNameContainerStyle}>
-						<Text style={styles.labelStyle}>{label}</Text>
+						<Text style={{ color: ON_BACKGROUND }}>{label}</Text>
 					</View>
 					<View style={styles.artistInfoContainerStyle}>
-						<Text style={styles.artistInfoStyle}>{`${numAlbums} ${albumLabel}`}</Text>
-						<Text style={styles.artistInfoStyle}> - </Text>
-						<Text style={styles.artistInfoStyle}>{`${numSongs} ${songLabel}`}</Text>
+						<Text style={{ color: ON_BACKGROUND_NOFOCUS }}>{`${numAlbums} ${albumLabel}`}</Text>
+						<Text style={{ color: ON_BACKGROUND_NOFOCUS }}> - </Text>
+						<Text style={{ color: ON_BACKGROUND_NOFOCUS }}>{`${numSongs} ${songLabel}`}</Text>
 					</View>
 				</View>
-			</TouchableHighlight>
+			</TouchableOpacity>
 		);
 	}
 
@@ -63,11 +67,7 @@ class ArtistCard extends Component {
 const styles = {
 	cardStyle: {
 		padding: 15,
-        borderBottomWidth: 1,
-		borderColor: DIVIDER
-	},
-	labelStyle: {
-		color: ON_BACKGROUND
+        borderBottomWidth: 1
 	},
 	artistNameContainerStyle: {
 		alignItems: 'center'
@@ -75,11 +75,13 @@ const styles = {
 	artistInfoContainerStyle: {
 		flexDirection: 'row',
 		justifyContent: 'center'
-	},
-	artistInfoStyle: {
-		color: ON_BACKGROUND_SECONDARY
 	}
 };
 //#endregion
 
-export default ArtistCard;
+const mapStateToProps = (state) => {
+	const { theme } = state.themeState;
+
+	return { theme };
+}
+export default connect(mapStateToProps)(ArtistCard);

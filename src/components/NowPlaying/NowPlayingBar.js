@@ -16,7 +16,6 @@ import defaultAlbumCover from '../../images/defaultAlbum.png';
 import playIcon from '../../images/play_white.png';
 import pauseIcon from '../../images/pause_white.png';
 import { skipTrack } from '../../actions';
-import { PRIMARY, ON_PRIMARY } from '../../themes/PurpleTeal/PurpleTeal';
 import ProgressBar from './ProgressBar';
 //#endregion
 
@@ -24,22 +23,23 @@ import ProgressBar from './ProgressBar';
 class NowPlayingBar extends Component {
 	render() {
 		const { coverPath, playPauseIcon, isPlaying, isPaused, song } = this.props;
+		const { PRIMARY, ON_PRIMARY, ON_PRIMARY_NOFOCUS } = this.props.theme;
 
 		if (isPlaying || isPaused) {
 			return (
-				<View style={styles.barContainerStyle}>
+				<View style={[{ backgroundColor: PRIMARY }, styles.barContainerStyle]}>
 					<View style={styles.progressBarContainerStyle}>
 						<ProgressBar />
 					</View>
 					<GestureRecognizer onSwipeLeft={this.props.skipTrack}>
-						<View style={{ flexDirection: 'row', borderTopWidth: 1, borderColor: '#404040' }}>
+						<View style={{ flexDirection: 'row', borderTopWidth: 1, borderColor: '#1c1c1c' }}>
 							<View>
 								<Image source={coverPath} style={styles.albumCoverStyle} />
 							</View>
 							<View style={styles.nowPlayingInfoStyle}>
-								<Text numberOfLines={1} style={styles.trackTitleStyle}>{song.title}</Text>
-								<Text numberOfLines={1} style={styles.trackArtistStyle}>{song.artist}</Text>
-								<Text numberOfLines={1} style={styles.trackAlbumStyle}>{song.album}</Text>
+								<Text numberOfLines={1} style={{ color: ON_PRIMARY }}>{song.title}</Text>
+								<Text numberOfLines={1} style={{ color: ON_PRIMARY_NOFOCUS }}>{song.artist}</Text>
+								<Text numberOfLines={1} style={{ color: ON_PRIMARY_NOFOCUS }}>{song.album}</Text>
 							</View>
 							<View style={styles.playPauseContainerStyle}>
 								<TouchableWithoutFeedback onPress={this.props.playPauseAction}>
@@ -73,7 +73,6 @@ const styles = {
 	},
 	barContainerStyle: {
 		width: '100%', 
-		backgroundColor: PRIMARY, 
 		height: 80, 
 		position: 'absolute', 
 		bottom: 0,
@@ -88,15 +87,6 @@ const styles = {
 		alignItems: 'center', 
 		justifyContent: 'center', 
 		padding: 10
-	},
-	trackTitleStyle: {
-		color: ON_PRIMARY
-	},
-	trackArtistStyle: {
-		color: ON_PRIMARY
-	},
-	trackAlbumStyle: {
-		color: ON_PRIMARY
 	},
 	playPauseContainerStyle: {
 		alignItems: 'center', 
@@ -114,6 +104,7 @@ const styles = {
 //#region MapStateToProps
 const mapStateToProps = (state, props) => {
 	const { isPlaying, isPaused, curSong } = state.nowPlayingState;
+	const { theme } = state.themeState;
 
 	// Determine which icon to use for Play/Pause
 	let playPauseIcon = '';
@@ -134,7 +125,7 @@ const mapStateToProps = (state, props) => {
 		}
 	}
 
-	return { ...props, isPlaying, isPaused, playPauseIcon, coverPath, song: curSong };
+	return { ...props, isPlaying, isPaused, playPauseIcon, coverPath, song: curSong, theme };
 };
 //#endregion
 

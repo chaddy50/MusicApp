@@ -6,7 +6,9 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import TrackPlayer from 'react-native-track-player';
 import reducers from './reducers';
-import Drawer from './routers/Drawer';
+import Root from './routers/Root';
+
+export const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 class App extends Component {
 	componentWillMount() {
@@ -29,11 +31,10 @@ class App extends Component {
 	}
 	
 	render() {
-		const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 		return (
 			<Provider store={store}>
 				<View style={{ flex: 1 }}>
-					<Drawer />
+					<Root />
 				</View>
 			</Provider>
 		);
