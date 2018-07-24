@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setupTheme } from '../actions';
+import { setupTheme, buildLibrary } from '../actions';
 import Drawer from './Drawer';
 
 class Root extends Component {
 	componentWillMount() {
 		this.props.setupTheme('MATERIAL_DARK', 'DEEP_PURPLE', 'LIGHT_BLUE');
+		this.props.buildLibrary();
 	}
 
 	render() {
@@ -13,4 +14,4 @@ class Root extends Component {
 	}
 }
 
-export default connect(null, { setupTheme })(Root);
+export default connect(null, { setupTheme, buildLibrary })(Root);

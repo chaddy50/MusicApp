@@ -4,13 +4,8 @@ import { connect } from 'react-redux';
 import { TabNavigator } from 'react-navigation';
 import _ from 'lodash';
 import ArtistList from '../components/Artist/ArtistList';
-import { buildLibrary } from '../actions';
 
 class GenreTabs extends Component {
-	componentWillMount() {
-		this.props.buildLibrary(this.props.navigation);
-	}
-
 	buildTabs() {
 		const { theme } = this.props;
 		const tabConfig = {
@@ -66,9 +61,10 @@ class GenreTabs extends Component {
 
 const mapStateToProps = (state) => {
 	const { library } = state.libraryState;
+	console.log(library);
 	const { theme } = state.themeState;
 
 	return { library, theme };
 };
 
-export default connect(mapStateToProps, { buildLibrary })(GenreTabs);
+export default connect(mapStateToProps)(GenreTabs);

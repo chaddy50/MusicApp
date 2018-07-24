@@ -11,10 +11,9 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import GestureRecognizer from 'react-native-swipe-gestures';
+import { Icon } from 'react-native-elements';
 import { playPauseAction } from '../../actions/NowPlayingActions';
 import defaultAlbumCover from '../../images/defaultAlbum.png';
-import playIcon from '../../images/play_white.png';
-import pauseIcon from '../../images/pause_white.png';
 import { skipTrack } from '../../actions';
 import ProgressBar from './ProgressBar';
 //#endregion
@@ -43,7 +42,11 @@ class NowPlayingBar extends Component {
 							</View>
 							<View style={styles.playPauseContainerStyle}>
 								<TouchableWithoutFeedback onPress={this.props.playPauseAction}>
-									<Image source={playPauseIcon} style={styles.playPauseIconStyle} />
+									<Icon 
+										name={playPauseIcon} 
+										size={50} 
+										color={ON_PRIMARY}
+									/> 
 								</TouchableWithoutFeedback>
 							</View>
 						</View>
@@ -109,9 +112,9 @@ const mapStateToProps = (state, props) => {
 	// Determine which icon to use for Play/Pause
 	let playPauseIcon = '';
 	if (isPlaying) {
-		playPauseIcon = pauseIcon;
+		playPauseIcon = 'pause';
 	} else {
-		playPauseIcon = playIcon;
+		playPauseIcon = 'play-arrow';
 	}
 
 	// Find the album cover path to use

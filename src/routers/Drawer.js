@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DrawerNavigator, withNavigation } from 'react-navigation';
-import RootStack from './RootStack';
+import { DrawerNavigator } from 'react-navigation';
+import Stack from './Stack';
 import DrawerItem from './DrawerItem';
 import ThemeSettings from '../components/Settings/ThemeSettings';
 
@@ -14,7 +14,7 @@ class Drawer extends Component {
 export const DrawerNav = DrawerNavigator(
 	{
 		Home: {
-			screen: RootStack
+			screen: Stack
 		},
 		ThemeSettings: {
 			screen: ThemeSettings,
@@ -35,4 +35,4 @@ const mapStateToProps = (state, props) => {
 	return { ...props, theme };
 };
 
-export default connect(mapStateToProps)(withNavigation(Drawer));
+export default connect(mapStateToProps)(Drawer);

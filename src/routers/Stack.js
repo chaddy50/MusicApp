@@ -33,17 +33,8 @@ export const RootStackNav = StackNavigator(
 {
 	Home: {
 		screen: GenreTabs,
-		navigationOptions: (props) => {
-			const { theme } = props.navigation.state.params;
-
-			if (theme) {
-				return {
-					headerStyle: {
-						backgroundColor: 'black'
-					}	
-				};
-			}
-			return {};
+		navigationOptions: {
+			header: null
 		}
 	},
 	AlbumList: {

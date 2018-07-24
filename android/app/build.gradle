@@ -137,9 +137,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-music-metadata')
     compile project(':image-color-picker')
     compile project(':react-native-fetch-blob')
-    compile project(':react-native-music-metadata')
     compile project(':react-native-track-player')
     compile project(':react-native-fs')
     compile fileTree(dir: "libs", include: ["*.jar"])
