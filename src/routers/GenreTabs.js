@@ -61,7 +61,6 @@ class GenreTabs extends Component {
 
 const mapStateToProps = (state) => {
 	const { library } = state.libraryState;
-	console.log(library);
 	const { theme } = state.themeState;
 
 	return { library, theme };
