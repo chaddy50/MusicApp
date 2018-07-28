@@ -7,3 +7,5 @@ export const RESET = 'reset';
 
 export const MATERIAL_DARK = 'material_dark';
 export const MATERIAL_LIGHT = 'material_light';
+export const DEEP_PURPLE = 'deep_purple';
+export const LIGHT_BLUE = 'light_blue';

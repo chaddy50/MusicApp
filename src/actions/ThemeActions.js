@@ -1,3 +1,5 @@
+import { MATERIAL_LIGHT, MATERIAL_DARK, DEEP_PURPLE, LIGHT_BLUE } from './types';
+
 export const setupTheme = (theme, primaryColor, secondaryColor) => {
     return (dispatch) => {
         const themeObject = getThemeObject(theme, primaryColor, secondaryColor);
@@ -9,14 +11,16 @@ export const setupTheme = (theme, primaryColor, secondaryColor) => {
     };
 };
 
-export const getThemeObject = (theme = 'MATERIAL_LIGHT', primaryColor = 'DEEP_PURPLE', secondaryColor = 'LIGHT_BLUE') => {
-
-    // Default to Material Dark
+export const getThemeObject = (theme = MATERIAL_DARK, primaryColor = DEEP_PURPLE, secondaryColor = LIGHT_BLUE) => {
     const primaryPalette = getColorPalette(primaryColor);
     const secondaryPalette = getColorPalette(secondaryColor);
     const themePalette = getMaterialTheme(theme);
 
     return ({
+            themeName: theme,
+            primaryColorName: primaryColor,
+            secondaryColorName: secondaryColor,
+            
             PRIMARY: primaryPalette.COLOR,
             PRIMARY_DARK: primaryPalette.DARK,
             PRIMARY_LIGHT: primaryPalette.LIGHT,
@@ -38,7 +42,7 @@ export const getThemeObject = (theme = 'MATERIAL_LIGHT', primaryColor = 'DEEP_PU
 };
 
 const getMaterialTheme = (theme) => {
-    if (theme === 'MATERIAL_LIGHT') {
+    if (theme === MATERIAL_LIGHT) {
         return {
             BACKGROUND: '#f5f5f5',
             BACKGROUND_LIGHT: '#616161',
@@ -57,7 +61,7 @@ const getMaterialTheme = (theme) => {
 };
 
 const getColorPalette = (color) => {
-    if (color === 'DEEP_PURPLE') {
+    if (color === DEEP_PURPLE) {
         return {
             COLOR: '#673AB7',
             LIGHT: '#D1C4E9',
@@ -67,7 +71,7 @@ const getColorPalette = (color) => {
             ON_LIGHT: '#fff',
             ON_DARK: '#fff'
         };
-    } else if (color === 'LIGHT_BLUE') {
+    } else if (color === LIGHT_BLUE) {
         return {
             COLOR: '#03A9F4',
             LIGHT: '#B3E5FC',
